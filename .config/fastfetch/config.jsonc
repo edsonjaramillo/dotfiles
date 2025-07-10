@@ -1,0 +1,205 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "display": {
+    "brightColor": false,
+    "temp": {
+      "color": {
+        "red": "red",
+        "yellow": "yellow",
+        "green": "green"
+      },
+      "unit": "F",
+      "ndigits": 0
+    },
+    "separator": "",
+    "constants": [
+      "───────────────" // {$1}, used in Custom module
+    ],
+    "key": {
+      "width": 4
+    }
+  },
+  "logo": {
+    "type": "file",
+    "source": "~/.config/fastfetch/ascii/pikachu.txt",
+    "padding": {
+      "right": 7
+    },
+    "color": {
+      "1": "black",
+      "2": "red",
+      "3": "green",
+      "4": "yellow",
+      "5": "magenta",
+      "6": "cyan",
+      "7": "cyan",
+      "8": "white"
+    }
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "┌{$1} General ─{$1}┐",
+      "outputColor": "red"
+    },
+    {
+      "type": "datetime",
+      "keyColor": "red",
+      "format": "[{8}] {5} {11}, {1}",
+      "key": ""
+    },
+    {
+      "type": "host",
+      "keyColor": "red",
+      "key": "󰟀"
+    },
+    {
+      "type": "uptime",
+      "keyColor": "red",
+      "key": ""
+    },
+    {
+      "type": "custom",
+      "format": "└{$1}──────────{$1}┘",
+      "outputColor": "red"
+    },
+    // Hardware
+    {
+      "type": "custom",
+      "format": "┌{$1} Hardware {$1}┐",
+      "outputColor": "green"
+    },
+    {
+      "type": "board",
+      "keyColor": "green",
+      "key": "󰚗"
+    },
+    {
+      "type": "cpu",
+      "key": "",
+      "keyColor": "green",
+      "showPeCoreCount": true,
+      "temp": true
+    },
+    {
+      "type": "gpu",
+      "key": "󰢮",
+      "keyColor": "green",
+      "temp": true
+    },
+    {
+      "type": "physicalmemory",
+      "keyColor": "green",
+      "key": ""
+    },
+    {
+      "type": "memory",
+      "key": "",
+      "keyColor": "green",
+      "format": "{1} / {2} ({3})"
+    },
+    {
+      "type": "physicaldisk",
+      "key": "󰋊",
+      "keyColor": "green",
+      "format": "{2} [{6}] [{7}]"
+    },
+    {
+      "type": "disk",
+      "key": "󰋊",
+      "showExternal": true,
+      "showSubvolumes": true,
+      "percent": {
+        "type": 9
+      },
+      "keyColor": "green",
+      "format": "{1} / {2} ({3}) [{9}]"
+    },
+    {
+      "type": "custom",
+      "format": "└{$1}──────────{$1}┘",
+      "outputColor": "green"
+    },
+    "break",
+    // Software
+    {
+      "type": "custom",
+      "format": "┌{$1} Software {$1}┐",
+      "outputColor": "yellow"
+    },
+    {
+      "type": "os",
+      "keyColor": "yellow",
+      "format": "{2} {10} {8}",
+      "key": ""
+    },
+
+    {
+      "type": "kernel",
+      "keyColor": "yellow",
+      "key": "󰹢"
+    },
+    {
+      "type": "custom",
+      "format": "└{$1}──────────{$1}┘"
+    },
+    "break",
+    // Terminal
+    {
+      "type": "custom",
+      "format": "┌{$1} Terminal {$1}┐",
+      "outputColor": "blue"
+    },
+    {
+      "type": "terminal",
+      "format": "{5}",
+      "keyColor": "blue",
+      "key": ""
+    },
+    {
+      "type": "shell",
+      "keyColor": "blue",
+      "key": ""
+    },
+    {
+      "type": "terminalfont",
+      "keyColor": "blue",
+      "key": ""
+    },
+    {
+      "type": "custom",
+      "format": "└{$1}──────────{$1}┘",
+      "outputColor": "blue"
+    },
+    "break",
+    // Network
+    {
+      "type": "custom",
+      "format": "┌{$1} Network ─{$1}┐",
+      "outputColor": "magenta"
+    },
+    {
+      "type": "localip",
+      "key": "󰩟",
+      "showIpv4": true,
+      "showSpeed": true,
+      "defaultRouteOnly": true,
+      "keyColor": "magenta"
+    },
+    {
+      "type": "dns",
+      "key": "󰑩",
+      "keyColor": "magenta",
+      "showType": "ipv4"
+    },
+    {
+      "type": "custom",
+      "format": "└{$1}──────────{$1}┘",
+      "outputColor": "magenta"
+    },
+    "break",
+    {
+      "type": "colors"
+    }
+  ]
+}
