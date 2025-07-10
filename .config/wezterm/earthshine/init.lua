@@ -1,5 +1,5 @@
 -- Main entry point for the plugin
-package.path = os.getenv("HOME") .. "/.config/wezterm/earthshine-wezterm/colors/init.lua;" .. package.path
+package.path = os.getenv("HOME") .. "/.config/wezterm/earthshine/colors/init.lua;" .. package.path
 
 local M = {}
 

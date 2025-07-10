@@ -2,7 +2,7 @@ local wezterm = require 'wezterm'
 
 local config = wezterm.config_builder()
 
-local earthshine = require 'earthshine-wezterm'
+local earthshine = require 'earthshine'
 config = earthshine.init(config)
 
 -- Font
@@ -20,7 +20,7 @@ config.background = {
         source = {
             File = wezterm.home_dir .. "/.config/wezterm/wallpapers/151.jpg",
         },
-        width = "Contain",
+    width = "Contain",
         height = "Contain",
         opacity = 1,
         hsb = {
