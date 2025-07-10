@@ -13,28 +13,14 @@
     },
     "separator": "",
     "constants": [
-      "───────────────" // {$1}, used in Custom module
+      "──────────────────" // {$1}, used in Custom module
     ],
     "key": {
       "width": 4
     }
   },
   "logo": {
-    "type": "file",
-    "source": "~/.config/fastfetch/ascii/pikachu.txt",
-    "padding": {
-      "right": 7
-    },
-    "color": {
-      "1": "black",
-      "2": "red",
-      "3": "green",
-      "4": "yellow",
-      "5": "magenta",
-      "6": "cyan",
-      "7": "cyan",
-      "8": "white"
-    }
+    "type": "none"
   },
   "modules": [
     {
@@ -200,6 +186,7 @@
     "break",
     {
       "type": "colors"
-    }
+    },
+    "break"
   ]
 }
