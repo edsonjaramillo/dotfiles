@@ -20,7 +20,7 @@ config.background = {
         source = {
             File = wezterm.home_dir .. "/.config/wezterm/wallpapers/151.jpg",
         },
-    width = "Contain",
+        width = "Contain",
         height = "Contain",
         opacity = 1,
         hsb = {
