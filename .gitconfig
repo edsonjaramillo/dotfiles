@@ -1,5 +1,148 @@
+# ==============================================================================
+# [user] section: Your identity for commits
+# This is crucial for Git to know who made a commit.
+# ==============================================================================
 [user]
 	email = edsonajaramillo@gmail.com
 	name = Edson Jaramillo
 [init]
 	defaultBranch = main
+
+# ==============================================================================
+# [core] section: Fundamental Git configuration
+# ==============================================================================
+# [core]
+    editor = code --wait                 # Set your preferred text editor for commit messages, merges, etc. (e.g., nano, code --wait
+    pager = less -F -X            # How Git pipes output (e.g., `git log`). -F exits if content fits, -X prevents clearing screen.
+    autocrlf = input              # Handles line endings. 'input' converts CRLF to LF on commit, keeps LF in repo. 'true' for Windows.
+    excludesfile = ~/.gitignore_global # Path to a global .gitignore file for patterns you always want to ignore.
+    whitespace = trailing-space,space-before-tab,indent-with-non-tab,cr-at-eol # Warns/errors on common whitespace issues.
+    filemode = true               # Tells Git to track file mode changes (e.g., execute permissions). Set to false on Windows if issues.
+    bareRepositoryAlias = bare    # Alias for bare repositories
+    checkStat = true              # Check stat data for changes. Usually true.
+    eol = auto                    # Auto-detect end-of-line style. Can be useful but autocrlf is more common.
+
+# ==============================================================================
+# [alias] section: Custom Git commands (shortcuts)
+# These are extremely powerful for streamlining your workflow.
+# ==============================================================================
+[alias]
+    st = status -sb               # Short status, showing branch and summary
+    co = checkout                 # Shortcut for checkout
+    ci = commit                   # Shortcut for commit
+    br = branch                   # Shortcut for branch
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short # A nice commit history view
+    last = log -1 HEAD            # Show the last commit
+    wip = diff --cached           # Show staged changes
+    unstage = reset HEAD --       # Unstage changes (opposite of `git add`)
+    amend = commit --amend --no-edit # Amend the last commit without changing its message
+    pullr = pull --rebase         # Always rebase when pulling
+
+# ==============================================================================
+# [color] section: Customize Git's output colors
+# Makes Git output more readable.
+# ==============================================================================
+[color]
+    ui = auto                     # Enable color for all Git commands where possible
+    branch = auto                 # Color for `git branch`
+    diff = auto                   # Color for `git diff`
+    status = auto                 # Color for `git status`
+    grep = auto                   # Color for `git grep`
+    interactive = auto            # Color for interactive commands (e.g., `git add -p`)
+
+# Customize specific colors (examples):
+[color "status"]
+    added = green bold
+    changed = yellow reverse
+    untracked = red normal
+[color "branch"]
+    current = yellow bold
+    local = green
+    remote = cyan
+
+# ==============================================================================
+# [push] section: Default push behavior
+# ==============================================================================
+[push]
+    default = simple              # 'simple' (recommended) pushes current branch to its upstream if names match, otherwise errors.
+                                  # 'upstream' pushes to the branch its tracking.
+                                  # 'matching' pushes all matching branches (deprecated/discouraged).
+    followTags = true             # Automatically push tags that point to the pushed commits.
+
+# ==============================================================================
+# [pull] section: Default pull behavior
+# ==============================================================================
+[pull]
+    rebase = false                # Set to 'true' to always rebase instead of merge when pulling.
+                                  # 'interactive' for interactive rebase.
+                                  # 'merges' to rebase but preserve merges.
+
+# ==============================================================================
+# [init] section: Default behavior for `git init`
+# ==============================================================================
+[init]
+    defaultBranch = main          # Set the default branch name for new repositories.
+
+# # ==============================================================================
+# # [pager] section: Configure pagers for specific commands
+# # Overrides global `core.pager` for specific commands.
+# # ==============================================================================
+# [pager]
+#     log = less -FX                # Use `less` for `git log`
+#     diff = less -FX               # Use `less` for `git diff`
+
+# # ==============================================================================
+# # [diff] section: Diff tool configuration
+# # ==============================================================================
+[diff]
+    tool = vscode                 # Set your preferred diff tool (e.g., meld, kdiff3, bc3, vscode, nvimdiff).
+                                  # You'll need to configure the actual tool command in a separate [difftool "<tool>"] section.
+    renames = copies            # Show renamed files as copies.
+    algorithm = histogram       # Use a different diff algorithm.
+
+# ==============================================================================
+# [merge] section: Merge tool configuration
+# ==============================================================================
+[merge]
+    tool = vscode                 # Set your preferred merge tool (e.g., meld, kdiff3, bc3, vscode).
+    conflictStyle = diff3       # Show conflicts in diff3 style.
+    ff = only                   # Only allow fast-forward merges when possible.
+
+# ==============================================================================
+# [difftool "<tool_name>"] and [mergetool "<tool_name>"] sections:
+# How Git should launch your diff/merge tools.
+# Replace 'vscode' with your chosen tool.
+# ==============================================================================
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
+[mergetool "vscode"]
+    cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED
+    trustExitCode = true          # Important for VS Code merge tool to tell Git if merge was successful
+
+# ==============================================================================
+# [fetch] section: Fetch settings
+# ==============================================================================
+[fetch]
+    prune = true                  # Prune local branches that no longer exist on the remote.
+
+# ==============================================================================
+# [rebase] section: Rebase settings
+# ==============================================================================
+[rebase]
+    autoSquash = true             # Automatically squash fixup! and squash! commits during rebase.
+    autoStash = true              # Stash local changes before rebasing and reapply them afterwards.
+
+# ==============================================================================
+# [status] section: Git status settings
+# ==============================================================================
+[status]
+    short = true                  # Use the short format by default for `git status`.
+    showUntrackedFiles = all      # How to show untracked files: 'all', 'normal', 'no'.
+    branch = true                 # Always show branch info.
+
+# ==============================================================================
+# [format] section: Patch format settings
+# ==============================================================================
+[format]
+    pretty = oneline              # Default format for `git log --pretty`.

@@ -6,6 +6,7 @@ SCRIPT_DIR="$PWD"
 
 # Array of dotfiles to link
 VALID_FILES=(
+    "$SCRIPT_DIR/.gitconfig"
     "$SCRIPT_DIR/.hstr_favorites"
     "$SCRIPT_DIR/.node-version"
     "$SCRIPT_DIR/.tmux.conf"
@@ -19,7 +20,6 @@ VALID_FILES=(
     "$SCRIPT_DIR/.config/wezterm/earthshine/init.lua"
     "$SCRIPT_DIR/.config/wezterm/wallpapers/151.jpg"
     "$SCRIPT_DIR/.config/yazi/yazi.toml"
-    "$SCRIPT_DIR/.gitconfig"
     "$SCRIPT_DIR/.sh/aliases/docker.aliases.sh"
     "$SCRIPT_DIR/.sh/aliases/replacement.aliases.sh"
     "$SCRIPT_DIR/.sh/aliases/scripts.aliases.sh"
