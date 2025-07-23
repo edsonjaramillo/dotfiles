@@ -1,5 +1,4 @@
-TOOLS_DIR     := tools
-SYMLINK_SCRIPT := $(TOOLS_DIR)/symlink.sh
+SYMLINK_SCRIPT := symlink.sh
 
 .PHONY: help link unlink dump install
 
