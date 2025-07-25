@@ -24,6 +24,7 @@ VALID_FILES=(
     ".sh/aliases/replacement.aliases.sh"
     ".sh/aliases/scripts.aliases.sh"
     ".sh/aliases/system.aliases.sh"
+    ".sh/functions/media.functions.zsh"
     ".sh/functions/search.functions.zsh"
     ".sh/functions/utility.functions.zsh"
     ".sh/functions/zoxide.functions.sh"
