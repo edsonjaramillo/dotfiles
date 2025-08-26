@@ -1,0 +1,9 @@
+# ==============================================================================
+# [user] section: Your identity for commits
+# This is crucial for Git to know who made a commit.
+# ==============================================================================
+[user]
+	email = edsonajaramillo@gmail.com
+	name = Edson Jaramillo
+[init]
+	defaultBranch = main
