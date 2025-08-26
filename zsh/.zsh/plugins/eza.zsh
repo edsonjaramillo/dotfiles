@@ -1,0 +1,1 @@
+export EZA_ICONS_AUTO="always"
