@@ -1,0 +1,20 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+[directory]
+truncation_length = 4
+truncation_symbol = "../"
+use_os_path_sep = true
+home_symbol = "~"
+
+[username]
+format = '[$user]($style)'
+disabled = false
+show_always = true
+
+[hostname]
+format = '@[$hostname]($style)'
+ssh_only = false
+style = "green bold"
+disabled = false
