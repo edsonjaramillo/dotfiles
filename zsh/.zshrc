@@ -15,4 +15,11 @@ fi
 eval "$(fnm env --use-on-cd --shell zsh)"
 source <(fnm completions --shell zsh)
 
+# Load script launcher
+[[ -f "$HOME/.zsh/scripts/script-launcher.sh" ]] && source "$HOME/.zsh/scripts/script-launcher.sh"
+
+# Load gum lib
 [[ -f "$HOME/.helpers/gumh.bash" ]] && source "$HOME/.helpers/gumh.bash"
+
+# zoxide
+[[ -f "$HOME/.helpers/zoxide.sh" ]] && source "$HOME/.helpers/zoxide.sh"
