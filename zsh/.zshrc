@@ -22,4 +22,5 @@ source <(fnm completions --shell zsh)
 [[ -f "$HOME/.helpers/gumh.bash" ]] && source "$HOME/.helpers/gumh.bash"
 
 # zoxide
+eval "$(zoxide init zsh)"
 [[ -f "$HOME/.helpers/zoxide.sh" ]] && source "$HOME/.helpers/zoxide.sh"
