@@ -22,4 +22,8 @@ return {
       "folke/neodev.nvim",
     },
   },
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "mason.nvim", "mason-lspconfig.nvim" },
+  }
 }

@@ -3,3 +3,6 @@ require("config.options")
 -- require("config.autocmds")
 -- require("config.commands")
 require("plugins") -- bootstrap lazy.nvim and load specs
+
+require("keymaps.telescope")
+require("config.mason-tool")
