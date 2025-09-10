@@ -1,10 +1,8 @@
 require("mason-tool-installer").setup({
 	ensure_installed = {
+		-- lua
 		"stylua",
-	},
-	integrations = {
-		['mason-lspconfig'] = true,
-		['mason-null-ls'] = false,
-		['mason-nvim-dap'] = false,
+		-- bash
+		"shfmt"
 	},
 })

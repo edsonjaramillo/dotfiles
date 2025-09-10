@@ -8,7 +8,7 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "mason.nvim" },
-    opts = { ensure_installed = { "lua_ls" } },
+    opts = { ensure_installed = { "lua_ls", "bashls" } },
   },
   {
     "neovim/nvim-lspconfig",
