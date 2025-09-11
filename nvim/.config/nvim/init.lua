@@ -4,5 +4,5 @@ require("config.options")
 -- require("config.commands")
 require("plugins") -- bootstrap lazy.nvim and load specs
 
-require("keymaps.telescope")
+require("keymaps.core")
 require("config.mason-tool")
