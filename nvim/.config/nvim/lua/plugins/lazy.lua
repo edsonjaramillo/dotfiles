@@ -13,6 +13,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = {
+        { import = "plugins.flash" },
         -- { import = "plugins.earthshine" },
     },
     defaults = { lazy = true },
