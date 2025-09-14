@@ -17,6 +17,7 @@ require("lazy").setup({
         { import = "plugins.earthshine" },
         { import = "plugins.flash" },
         { import = "plugins.lsp" },
+        { import = "plugins.statusline" },
     },
     defaults = { lazy = true },
     checker = { enabled = true },
