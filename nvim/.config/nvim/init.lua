@@ -6,6 +6,7 @@ require("plugins.lazy")
 
 -- load configs
 require("options.lsp")
+require("options.finder")
 require("options.statusline")
 
 -- load keymaps

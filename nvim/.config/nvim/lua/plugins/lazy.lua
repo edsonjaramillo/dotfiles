@@ -16,6 +16,7 @@ require("lazy").setup({
         { import = "plugins.completions" },
         { import = "plugins.earthshine" },
         { import = "plugins.flash" },
+        { import = "plugins.finder" },
         { import = "plugins.lsp" },
         { import = "plugins.statusline" },
     },
