@@ -2,12 +2,8 @@
 require("options._base")
 
 -- load plugins
-require("plugins.lazy")
-
--- load configs
-require("options.lsp")
-require("options.finder")
-require("options.statusline")
+require("plugins.package_manager")
 
 -- load keymaps
 require("keymaps._base")
+require("keymaps.lsp")
