@@ -13,9 +13,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = {
+        { import = "plugins.which_key" },
         { import = "plugins.completions" },
         { import = "plugins.earthshine" },
-        { import = "plugins.flash" },
+        { import = "plugins.explorer" },
         { import = "plugins.finder" },
         { import = "plugins.lsp" },
         { import = "plugins.statusline" },
