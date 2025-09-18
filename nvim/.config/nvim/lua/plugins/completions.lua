@@ -10,30 +10,39 @@ return {
             },
         },
     },
-    "saghen/blink.cmp",
-    dependencies = "rafamadriz/friendly-snippets",
-    version = "1.*",
-
-    ---@module 'blink.cmp'
-    ---@type blink.cmp.Config
-    opts = {
-        completion = {
-            documentation = {
-                auto_show = true,
-            },
-        },
-        sources = {
-            default = { "lsp", "path", "snippets", "buffer", "lazydev" },
-            providers = {
-                lazydev = {
-                    name = "LazyDev",
-                    module = "lazydev.integrations.blink",
-                    score_offset = 100, -- make lazydev completions top priority (see `:h blink.cmp`)
+    { -- optional blink completion source for require statements and module annotations
+        "saghen/blink.cmp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        opts = {
+            sources = {
+                -- add lazydev to your completion providers
+                default = {
+                    "lazydev",
+                    "lsp",
+                    "path",
+                    "snippets",
+                    "buffer",
+                },
+                providers = {
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
+                    },
                 },
             },
+            completion = { documentation = { auto_show = true } },
+            keymap = {
+                preset = "default",
+                ["<CR>"] = { "accept", "fallback" },
+                ["<C><leader>"] = { "show" },
+            },
+            appearance = {
+                nerd_font_variant = "mono",
+            },
+            fuzzy = { implementation = "prefer_rust_with_warning" },
         },
-        signature = { enabled = true },
+        opts_extend = { "sources.default" },
     },
-
-    opts_extend = { "sources.default" },
 }

@@ -6,4 +6,3 @@ require("plugins.package_manager")
 
 -- load keymaps
 require("keymaps._base")
-require("keymaps.lsp")
