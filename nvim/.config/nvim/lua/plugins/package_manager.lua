@@ -15,6 +15,7 @@ require("lazy").setup({
     spec = {
         { import = "plugins.which_key" },
         { import = "plugins.completions" },
+        { import = "plugins.ai" },
         { import = "plugins.earthshine" },
         { import = "plugins.explorer" },
         { import = "plugins.finder" },
