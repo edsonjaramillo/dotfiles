@@ -23,4 +23,4 @@ source <(fnm completions --shell zsh)
 
 # zoxide
 eval "$(zoxide init zsh)"
-[[ -f "$HOME/libs/zoxide.sh" ]] && source "$HOME/libs/zoxide.sh"
+[[ -f "$HOME/.zoxide/zoxide.sh" ]] && source "$HOME/.zoxide/zoxide.sh"
