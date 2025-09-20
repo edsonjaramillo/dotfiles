@@ -9,12 +9,12 @@ use_os_path_sep = true
 home_symbol = "~"
 
 [username]
-format = '[$user]($style)'
+format = "[$user]($style)"
 disabled = false
 show_always = true
 
 [hostname]
-format = '@[$hostname]($style)'
+format = "@[$hostname]($style)"
 ssh_only = false
 style = "green bold"
 disabled = false
