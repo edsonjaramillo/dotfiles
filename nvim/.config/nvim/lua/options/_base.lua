@@ -40,8 +40,8 @@ o.splitbelow = true -- Horizontal splits open below
 o.equalalways = false -- Don't auto-resize splits on window close
 
 -- Tabs, indentation, and formatting
-o.tabstop = 2 -- Visual width of a tab character
-o.shiftwidth = 2 -- Indent width for >> << and autoindent
+o.tabstop = 4 -- Visual width of a tab character
+o.shiftwidth = 4 -- Indent width for >> << and autoindent
 o.expandtab = true -- Convert tabs to spaces
 o.smartindent = true -- Smarter auto-indenting on new lines
 o.shiftround = true -- Round indents to multiples of shiftwidth
