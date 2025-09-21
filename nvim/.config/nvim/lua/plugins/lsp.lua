@@ -23,8 +23,6 @@ return {
                         },
                     },
                 },
-                bashls = {},
-                tombi = {}
             },
         },
         config = function(_, opts)
@@ -32,19 +30,6 @@ return {
             require("mason-lspconfig").setup()
             -- Enable virtual text for diagnostics
             vim.diagnostic.config({ virtual_text = true })
-        end,
-    },
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        event = { "BufReadPost", "BufNewFile" },
-        opts = {
-            highlight = { enable = true },
-            indent = { enable = true },
-            ensure_installed = { "vim", "vimdoc", "lua", "bash", "toml" },
-        },
-        config = function(_, opts)
-            require("nvim-treesitter.configs").setup(opts)
         end,
     },
     {
@@ -60,10 +45,27 @@ return {
                     "bashls",
                     "shfmt",
                     "shellcheck",
+                    -- python
+                    "pyright",
+                    "ruff",
                     -- toml
-                    "tombi"
+                    "tombi",
                 },
             })
+        end,
+    },
+    -- syntax highlighting
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        event = { "BufReadPost", "BufNewFile" },
+        opts = {
+            highlight = { enable = true },
+            indent = { enable = true },
+            ensure_installed = { "vim", "vimdoc", "lua", "bash", "python", "toml" },
+        },
+        config = function(_, opts)
+            require("nvim-treesitter.configs").setup(opts)
         end,
     },
 }
