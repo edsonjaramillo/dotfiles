@@ -123,6 +123,11 @@ wk.add({
         desc = "Man Pages (Snacks)",
     },
     {
+        "<leader>sH",
+        function() snacks.picker.highlights() end,
+        desc = "Highlights"
+    },
+    {
         "<leader>sg",
         function()
             snacks.picker.grep({ hidden = true })
