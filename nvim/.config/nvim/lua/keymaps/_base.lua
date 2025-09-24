@@ -124,8 +124,10 @@ wk.add({
     },
     {
         "<leader>sH",
-        function() snacks.picker.highlights() end,
-        desc = "Highlights"
+        function()
+            snacks.picker.highlights()
+        end,
+        desc = "Highlights",
     },
     {
         "<leader>sg",
