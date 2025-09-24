@@ -11,6 +11,9 @@ fi
 [[ -f "$HOME/.zsh/plugins/history.zsh" ]] && source "$HOME/.zsh/plugins/history.zsh"
 [[ -f "$HOME/.zsh/plugins/eza.zsh" ]] && source "$HOME/.zsh/plugins/eza.zsh"
 
+# Source aliases 
+[[ -f "$HOME/.zsh/aliases/system.sh" ]] && source "$HOME/.zsh/aliases/system.sh"
+
 # FNN (Fast Node Manager)
 eval "$(fnm env --use-on-cd --shell zsh)"
 source <(fnm completions --shell zsh)
