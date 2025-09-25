@@ -1,7 +1,7 @@
 return {
-    cmd = { "lua-language-server" },
-    filetypes = { "lua" },
-    root_markers = { ".git/", "lua" },
-    single_file_support = true,
-    log_level = vim.lsp.protocol.MessageType.Warning,
+	cmd = { "lua-language-server" },
+	filetypes = { "lua" },
+	root_markers = { ".git/", "lua" },
+	single_file_support = true,
+	log_level = vim.lsp.protocol.MessageType.Warning,
 }

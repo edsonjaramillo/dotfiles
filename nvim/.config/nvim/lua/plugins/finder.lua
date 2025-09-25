@@ -1,10 +1,10 @@
 return {
-    {
-        "folke/snacks.nvim",
-        opts = {
-            picker = {},
-            explorer = {},
-        },
-        keys = {},
-    },
+	{
+		"folke/snacks.nvim",
+		opts = {
+			picker = {},
+			explorer = {},
+		},
+		keys = {},
+	},
 }

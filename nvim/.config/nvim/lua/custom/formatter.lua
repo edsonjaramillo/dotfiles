@@ -88,7 +88,10 @@ M.command = function(topic, bufnr, cmd, input)
 	local result = vim.system(cmd, { stdin = input, text = true }):wait()
 
 	if result.code ~= 0 then
-		M.error(topic, "Command failed with exit code " .. result.code .. ": " .. (result.stderr or ""))
+		M.error(
+			topic,
+			"Command failed with exit code " .. result.code .. ": " .. (result.stderr or "")
+		)
 		return
 	end
 
@@ -99,4 +102,3 @@ M.command = function(topic, bufnr, cmd, input)
 end
 
 return M
-

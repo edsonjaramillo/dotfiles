@@ -21,17 +21,17 @@ o.showmode = false -- Hide -- INSERT -- (statusline usually shows it)
 -- Invisible characters and filler
 o.list = true -- Show invisible chars using listchars
 o.listchars = {
-    tab = "» ",
-    trail = "·",
-    extends = "›",
-    precedes = "‹",
-    nbsp = "␣",
+	tab = "» ",
+	trail = "·",
+	extends = "›",
+	precedes = "‹",
+	nbsp = "␣",
 }
 o.fillchars = {
-    eob = " ", -- Hide ~ on empty lines
-    fold = " ",
-    foldsep = " ",
-    vert = "│",
+	eob = " ", -- Hide ~ on empty lines
+	fold = " ",
+	foldsep = " ",
+	vert = "│",
 }
 
 -- Splits and windows

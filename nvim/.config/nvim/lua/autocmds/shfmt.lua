@@ -22,4 +22,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		fmt.command("shfmt", bufnr, argv, input)
 	end,
 })
-
