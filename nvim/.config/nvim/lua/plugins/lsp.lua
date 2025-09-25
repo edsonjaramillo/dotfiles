@@ -70,6 +70,8 @@ return {
                     -- python
                     "pyright",
                     "ruff",
+                    -- json
+                    "jsonls",
                     -- toml
                     "tombi",
                 },
