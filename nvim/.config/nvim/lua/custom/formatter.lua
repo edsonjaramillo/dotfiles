@@ -30,10 +30,20 @@ M.success = function(topic, msg)
 	notify(msg, "success", { title = "Formatter (" .. topic .. ")" })
 end
 
+M.debug = function(topic, msg)
+	notify(msg, "info", { title = "Formatter (" .. topic .. ")" })
+end
+
 -- Get the current buffer's filetype
 -- @return string The filetype of the current buffer
 M.get_filetype = function()
 	return vim.bo.filetype
+end
+
+-- Get filename of the current buffer
+-- @return string The filename of the current buffer
+M.get_filename = function()
+	return vim.api.nvim_buf_get_name(0)
 end
 
 -- Check if the current filetype is in the list of valid valid_types
@@ -95,7 +105,7 @@ M.command = function(topic, bufnr, cmd, input)
 		return
 	end
 
-	local formatted_lines = vim.split(result.stdout, "\n", { trimempty = false })
+	local formatted_lines = vim.split(result.stdout, "\n", { trimempty = true })
 
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, formatted_lines)
 	M.success(topic, "Formatted buffer " .. bufnr .. " successfully")
