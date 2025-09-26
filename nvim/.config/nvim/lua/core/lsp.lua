@@ -1,8 +1,3 @@
-vim.lsp.enable({
-	"lua_ls",
-	"bashls",
-})
-
 vim.diagnostic.config({
 	virtual_text = true,
 	underline = true,

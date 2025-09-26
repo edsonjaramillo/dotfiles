@@ -1,14 +1,12 @@
 return {
 	-- lspconfig
 	{
-		"mason-org/mason.nvim",
-		build = ":MasonUpdate",
+		"mason-org/mason-lspconfig.nvim",
 		opts = {},
-		config = function()
-			require("mason").setup()
-			-- Enable virtual text for diagnostics
-			vim.diagnostic.config({ virtual_text = true })
-		end,
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+			"neovim/nvim-lspconfig",
+		},
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -17,21 +15,20 @@ return {
 			require("mason-tool-installer").setup({
 				ensure_installed = {
 					-- lua
-					"lua-language-server",
+					"lua_ls",
 					"stylua",
 					-- bash
-					"bash-language-server",
+					"bashls",
 					"shfmt",
-					-- "shellcheck",
 					-- node
-					-- "ts_ls",
-					-- "eslint",
-					-- "prettier",
+					"ts_ls",
+					"eslint",
+					"prettier",
 					-- python
 					-- "pyright",
 					-- "ruff",
 					-- json
-					-- "jsonls",
+					"jsonls",
 					-- toml
 					-- "tombi",
 				},
