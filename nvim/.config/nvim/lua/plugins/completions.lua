@@ -13,6 +13,7 @@ return {
 	{ -- optional blink completion source for require statements and module annotations
 		"saghen/blink.cmp",
 		dependencies = { "rafamadriz/friendly-snippets" },
+		version = "1.*",
 		opts = {
 			sources = {
 				-- add lazydev to your completion providers
