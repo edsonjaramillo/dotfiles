@@ -4,4 +4,12 @@ return {
 		event = "InsertEnter",
 		opts = {},
 	},
+	{
+		"numToStr/Comment.nvim",
+		opts = {},
+		lazy = false,
+	},
+	{
+		"windwp/nvim-ts-autotag",
+	},
 }
