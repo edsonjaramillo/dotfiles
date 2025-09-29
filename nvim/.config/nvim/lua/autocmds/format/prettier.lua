@@ -1,28 +1,26 @@
-local fmt = require("custom.formatter")
-
+local prettier = require("abide").Abide:new("prettier")
 -- Auto-format JavaScript/TypeScript/JSON files with prettier on save
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = { "*.js", "*.jsx", "*.mjs", "*.ts", "*.tsx", "*.json" },
 	callback = function()
-		local filetype = fmt.get_filetype()
-		fmt.debug("prettier", "Filetype: " .. filetype)
+		local filetype = prettier:get_filetype()
 		local filetypes =
 			{ "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "jsonc" }
-		if not fmt.check_filetype(filetype, filetypes) then
+		if not prettier:check_filetypes(filetype, filetypes) then
 			return
 		end
 
-		if not fmt.check_executable("prettier") then
+		if not prettier:check_executable() then
 			return
 		end
 
-		local lines = fmt.get_buffer_lines()
+		local lines = prettier:get_buffer_lines()
 		local input = table.concat(lines, "\n")
 
-		local filename = fmt.get_filename()
+		local filename = prettier:get_filename()
 		local argv = { "prettier", "--stdin-filepath", filename }
 
-		local bufnr = fmt.get_bufnr()
-		fmt.command("prettier", bufnr, argv, input)
+		local bufnr = prettier:get_bufnr()
+		prettier:command(bufnr, argv, input)
 	end,
 })
