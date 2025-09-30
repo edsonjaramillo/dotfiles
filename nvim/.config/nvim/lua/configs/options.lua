@@ -5,9 +5,7 @@ g.maplocalleader = ","
 local o = vim.opt
 
 -- UI: lines, columns, and visuals
-o.number = true -- Show absolute line numbers
 o.relativenumber = true -- Show relative line numbers (great for motions)
-o.statuscolumn = "%s %{v:lnum}   %{v:relnum} " -- Custom status column with signs and line numbers
 o.cursorline = true -- Highlight the current line
 o.signcolumn = "yes" -- Always show sign column (prevents text shift)
 o.colorcolumn = "100" -- Visual guide for code width (adjust to taste)
