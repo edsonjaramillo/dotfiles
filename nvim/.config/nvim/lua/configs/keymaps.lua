@@ -49,6 +49,14 @@ wk.add({
 		end,
 		desc = "Config Files (Snacks)",
 	},
+	-- snacks file picker where cwd is ~/code/nvim-plugins/
+	{
+		"<leader>fp",
+		function()
+			snacks.picker.files({ cwd = "~/code/nvim-plugins/", hidden = true })
+		end,
+		desc = "Plugin Files (Snacks)",
+	},
 }, { mode = "n" })
 
 -- lsp
@@ -152,5 +160,18 @@ wk.add({
 		"<leader>sx",
 		"<cmd>nohlsearch<CR>",
 		desc = "Clear search highlight",
+	},
+}, { mode = "n" })
+
+-- toggleterm
+wk.add({
+	{
+		"<leader>t",
+		group = "Terminal",
+	},
+	{
+		"<leader>tt",
+		"<cmd>ToggleTerm<CR>",
+		desc = "Toggle Terminal (ToggleTerm)",
 	},
 }, { mode = "n" })
