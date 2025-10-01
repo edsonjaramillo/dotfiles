@@ -8,6 +8,21 @@ for _, key in ipairs(esc_keys) do
 		desc = "Exit to Normal mode",
 	})
 end
+--
+wk.add({
+	{
+		"<C-d>",
+		function()
+			local col = vim.fn.col(".")
+			local line = vim.fn.getline(".")
+			if col > 1 and line:sub(col - 1, col - 1):match("%w") then
+				vim.cmd("normal! b")
+			end
+			vim.cmd("normal! dW")
+		end,
+		desc = "Delete Word",
+	},
+}, { mode = { "n" } })
 
 -- oil
 wk.add({
