@@ -24,6 +24,12 @@ wk.add({
 	},
 }, { mode = { "n" } })
 
+-- move line up and down in normal, visual and insert mode
+wk.add({
+	{ "<A-k>", ":m .-2<CR>==", desc = "Move Line Up" },
+	{ "<A-j>", ":m .+1<CR>==", desc = "Move Line Down" },
+}, { mode = { "n" } })
+
 -- oil
 wk.add({
 	{ "<leader>e", "<cmd>Oil<CR>", desc = "Open Explorer (Oil)" },
