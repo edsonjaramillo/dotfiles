@@ -8,10 +8,11 @@ for _, key in ipairs(esc_keys) do
 		desc = "Exit to Normal mode",
 	})
 end
---
+
+-- better delete word in normal mode
 wk.add({
 	{
-		"<C-d>",
+		"<C-w>",
 		function()
 			local col = vim.fn.col(".")
 			local line = vim.fn.getline(".")
@@ -121,12 +122,6 @@ wk.add({
 		desc = "Workspace Symbols (Snacks)",
 	},
 	{
-		"<leader>lh",
-		vim.lsp.buf.hover,
-		desc = "Hover (LSP)",
-	},
-	{
-		-- space to hover
 		"K",
 		vim.lsp.buf.hover({
 			focusable = false,
@@ -175,6 +170,20 @@ wk.add({
 			snacks.picker.lines()
 		end,
 		desc = "Jumps (Snacks)",
+	},
+	{
+		"<leader>sk",
+		function()
+			snacks.picker.keymaps()
+		end,
+		desc = "Keymaps (Snacks)",
+	},
+	{
+		"<leader>sC",
+		function()
+			snacks.picker.commands()
+		end,
+		desc = "Commands (Snacks)",
 	},
 	{
 		"<leader>sr",
