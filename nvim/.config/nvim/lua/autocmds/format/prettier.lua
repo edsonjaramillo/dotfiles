@@ -1,11 +1,21 @@
 local prettier = require("abide").Abide:new("prettier")
--- Auto-format JavaScript/TypeScript/JSON files with prettier on save
+
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.js", "*.jsx", "*.mjs", "*.ts", "*.tsx", "*.json" },
+	pattern = { "*.js", "*.jsx", "*.mjs", "*.ts", "*.tsx", "*.json", "*.jsonc" },
 	callback = function()
 		local filetype = prettier:get_filetype()
-		local filetypes =
-			{ "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "jsonc" }
+
+		local filetypes = {
+			"javascript",
+			"javascriptreact",
+			"javascript.jsx",
+			"typescript",
+			"typescriptreact",
+			"typescript.tsx",
+			"json",
+			"jsonc",
+		}
+
 		if not prettier:check_filetypes(filetype, filetypes) then
 			return
 		end
@@ -14,13 +24,26 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			return
 		end
 
-		local lines = prettier:get_buffer_lines()
-		local input = table.concat(lines, "\n")
+		local stdin = prettier:get_buffer_lines()
+
+		local argv = { "prettier" }
+		local prettier_config = prettier:find_config_file({ "prettier.config.mjs" })
+		if prettier_config then
+			table.insert(argv, "--config")
+			table.insert(argv, prettier_config)
+		end
 
 		local filename = prettier:get_filename()
-		local argv = { "prettier", "--stdin-filepath", filename }
+		table.insert(argv, "--stdin-filepath")
+		table.insert(argv, filename)
 
 		local bufnr = prettier:get_bufnr()
-		prettier:command(bufnr, argv, input)
+		prettier:command({
+			bufnr = bufnr,
+			argv = argv,
+			stdin = stdin,
+			has_config = prettier_config ~= nil,
+			config_path = prettier_config,
+		})
 	end,
 })

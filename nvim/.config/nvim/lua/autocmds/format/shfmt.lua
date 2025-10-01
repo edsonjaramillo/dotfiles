@@ -13,12 +13,17 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			return
 		end
 
-		local lines = shfmt:get_buffer_lines()
-		local input = table.concat(lines, "\n")
+		local stdin = shfmt:get_buffer_lines()
 
 		local argv = { "shfmt", "-filename", "stdin", "-" }
 
 		local bufnr = shfmt:get_bufnr()
-		shfmt:command(bufnr, argv, input)
+		shfmt:command({
+			bufnr = bufnr,
+			argv = argv,
+			stdin = stdin,
+			has_config = false,
+			config_path = nil,
+		})
 	end,
 })
