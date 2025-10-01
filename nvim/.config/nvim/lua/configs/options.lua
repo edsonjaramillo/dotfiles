@@ -41,7 +41,6 @@ o.equalalways = false -- Don't auto-resize splits on window close
 -- Tabs, indentation, and formatting
 o.tabstop = 4 -- Visual width of a tab character
 o.shiftwidth = 4 -- Indent width for >> << and autoindent
-o.expandtab = true -- Convert tabs to spaces
 o.smartindent = true -- Smarter auto-indenting on new lines
 o.shiftround = true -- Round indents to multiples of shiftwidth
 
@@ -81,3 +80,29 @@ o.confirm = true -- Confirm before closing unsaved buffers
 o.hidden = true -- Allow switching buffers without saving
 o.fileencoding = "utf-8" -- Default file encoding
 o.spell = false -- Spellcheck off by default; toggle when needed
+
+-- Cursor appearance and behavior
+o.guicursor = table.concat({
+	"a:blinkon0", -- no blinking in any mode
+
+	-- Normal mode: white block with black text
+	"n:block-Cursor/lCursor",
+
+	-- Visual modes: blue block with black text
+	"v:block-VisualCursor/lCursor",
+	"V:block-VisualCursor/lCursor",
+
+	-- Insert (and cmdline-insert): thin green bar
+	"i-ci:ver25-iCursor/lCursor",
+
+	-- (Optional) Replace modes: thin red line
+	"r-cr:vej25-ReplaceCursor/lCursor",
+}, ",")
+
+-- Define the highlight groups used above
+local sethl = vim.api.nvim_set_hl
+sethl(0, "Cursor", { fg = "#030303", bg = "#fafafa" }) -- normal
+sethl(0, "lCursor", { fg = "#030303", bg = "#fafafa" }) -- langmap cursor (match normal)
+sethl(0, "VisualCursor", { fg = "#030303", bg = "#409cff" }) -- blue
+sethl(0, "iCursor", { fg = "#030303", bg = "#24d064" }) -- green
+sethl(0, "ReplaceCursor", { fg = "#030303", bg = "#e35659" }) -- optional
