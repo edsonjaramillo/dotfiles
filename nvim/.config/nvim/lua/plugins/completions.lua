@@ -33,7 +33,10 @@ return {
 					},
 				},
 			},
-			completion = { documentation = { auto_show = true } },
+			completion = {
+				documentation = { auto_show = true },
+				list = { selection = { preselect = false } },
+			},
 			keymap = {
 				preset = "default",
 				["<CR>"] = { "accept", "fallback" },
