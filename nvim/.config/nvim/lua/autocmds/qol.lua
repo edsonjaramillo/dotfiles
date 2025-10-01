@@ -29,9 +29,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- reload file if changed outside of nvim
-vim.api.nvim_create_autocmd(
-	{ "FocusGained", "TermClose", "TermLeave", "CursorHold", "CursorHoldI" },
-	{
-		command = "checktime",
-	}
-)
+vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
+	command = "checktime",
+})
