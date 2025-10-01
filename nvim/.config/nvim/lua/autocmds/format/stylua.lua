@@ -20,7 +20,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			table.insert(argv, "--config-path")
 			table.insert(argv, stylua_config)
 		end
-
 		table.insert(argv, "-") -- Read from stdin
 
 		local bufnr = stylua:get_bufnr()
