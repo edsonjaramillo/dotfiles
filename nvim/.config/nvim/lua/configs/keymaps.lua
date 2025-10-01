@@ -9,13 +9,6 @@ for _, key in ipairs(esc_keys) do
 	})
 end
 
--- base
-wk.add({
-	{ "<leader>w", "<cmd>w<CR>", desc = "Save File (File)" },
-	{ "<leader>q", "<cmd>q<CR>", desc = "Quit (File)" },
-	{ "<leader>x", "<cmd>x<CR>", desc = "Save and Quit (File)" },
-}, { mode = "n" })
-
 -- oil
 wk.add({
 	{ "<leader>e", "<cmd>Oil<CR>", desc = "Open Explorer (Oil)" },
@@ -31,7 +24,10 @@ wk.add({
 	{
 		"<leader>ff",
 		function()
-			snacks.picker.files({ hidden = true })
+			-- if cwd is ~/dotfiles, show hidden files
+			local cwd = vim.fn.getcwd()
+			local is_dotfiles = cwd == vim.fn.expand("~") .. "/dotfiles"
+			snacks.picker.files({ hidden = is_dotfiles })
 		end,
 		desc = "Find Files (Snacks)",
 	},
@@ -53,7 +49,7 @@ wk.add({
 	{
 		"<leader>fp",
 		function()
-			snacks.picker.files({ cwd = "~/code/nvim-plugins/", hidden = true })
+			snacks.picker.files({ cwd = "~/code/nvim-plugins/" })
 		end,
 		desc = "Plugin Files (Snacks)",
 	},
@@ -97,13 +93,6 @@ wk.add({
 		desc = "References (Snacks)",
 	},
 	{
-		"<leader>ls",
-		function()
-			snacks.picker.lsp_document_symbols()
-		end,
-		desc = "Document Symbols (Snacks)",
-	},
-	{
 		"<leader>lS",
 		function()
 			snacks.picker.lsp_workspace_symbols()
@@ -113,6 +102,14 @@ wk.add({
 	{
 		"<leader>lh",
 		vim.lsp.buf.hover,
+		desc = "Hover (LSP)",
+	},
+	{
+		-- space to hover
+		"K",
+		vim.lsp.buf.hover({
+			focusable = false,
+		}),
 		desc = "Hover (LSP)",
 	},
 }, { mode = "n" })
@@ -136,6 +133,13 @@ wk.add({
 			snacks.picker.highlights()
 		end,
 		desc = "Highlights",
+	},
+	{
+		"<leader>sd",
+		function()
+			snacks.picker.lsp_symbols()
+		end,
+		desc = "Go to Definition (Snacks)",
 	},
 	{
 		"<leader>sg",
@@ -175,3 +179,15 @@ wk.add({
 		desc = "Toggle Terminal (ToggleTerm)",
 	},
 }, { mode = "n" })
+
+-- insert keymap
+wk.add({
+	{
+		"<A-;>",
+		function()
+			require("Comment.api").toggle.linewise.current()
+		end,
+		desc = "Toggle Comment (Comment.nvim)",
+		remap = false,
+	},
+}, { mode = { "n", "i", "v" } })
