@@ -1,0 +1,68 @@
+local snacks = require("snacks")
+local wk = require("which-key")
+
+wk.add({
+	{
+		"<leader>s",
+		group = "Search",
+	},
+	{
+		"<leader>sm",
+		function()
+			snacks.picker.man()
+		end,
+		desc = "Man Pages (Snacks)",
+	},
+	{
+		"<leader>sH",
+		function()
+			snacks.picker.highlights()
+		end,
+		desc = "Highlights",
+	},
+	{
+		"<leader>sd",
+		function()
+			snacks.picker.lsp_symbols()
+		end,
+		desc = "Go to Definition (Snacks)",
+	},
+	{
+		"<leader>sg",
+		function()
+			snacks.picker.grep({ hidden = true })
+		end,
+		desc = "Grep (Snacks)",
+	},
+	{
+		"<leader>ss",
+		function()
+			snacks.picker.lines()
+		end,
+		desc = "Jumps (Snacks)",
+	},
+	{
+		"<leader>sk",
+		function()
+			snacks.picker.keymaps()
+		end,
+		desc = "Keymaps (Snacks)",
+	},
+	{
+		"<leader>sC",
+		function()
+			snacks.picker.commands()
+		end,
+		desc = "Commands (Snacks)",
+	},
+	{
+		"<leader>sr",
+		[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+		desc = "Replace Word Under Cursor",
+	},
+	{
+		"<leader>sx",
+		"<cmd>nohlsearch<CR>",
+		desc = "Clear search highlight",
+	},
+}, { mode = "n" })

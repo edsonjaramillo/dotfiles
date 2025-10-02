@@ -1,0 +1,7 @@
+require("configs.keymaps.ai")
+require("configs.keymaps.explorer")
+require("configs.keymaps.files")
+require("configs.keymaps.lsp")
+require("configs.keymaps.qol")
+require("configs.keymaps.search")
+require("configs.keymaps.terminal")

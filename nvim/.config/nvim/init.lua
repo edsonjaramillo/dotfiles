@@ -8,7 +8,7 @@ require("core.lazy")
 require("core.lsp")
 
 -- load keymaps
-require("configs.keymaps")
+require("configs.keymaps.init")
 
 -- load autocmds
 require("autocmds.init")

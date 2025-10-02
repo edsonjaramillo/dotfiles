@@ -1,0 +1,32 @@
+local wk = require("which-key")
+local esc_keys = { "jk", "kj" }
+
+for _, key in ipairs(esc_keys) do
+	vim.keymap.set({ "i", "v", "x", "s", "c" }, key, "<Esc>", {
+		noremap = true,
+		silent = true,
+		desc = "Exit to Normal mode",
+	})
+end
+
+-- better delete word in normal mode
+wk.add({
+	{
+		"<C-w>",
+		function()
+			local col = vim.fn.col(".")
+			local line = vim.fn.getline(".")
+			if col > 1 and line:sub(col - 1, col - 1):match("%w") then
+				vim.cmd("normal! b")
+			end
+			vim.cmd("normal! dW")
+		end,
+		desc = "Delete Word",
+	},
+}, { mode = { "n" } })
+
+-- move line up and down in normal, visual and insert mode
+wk.add({
+	{ "<A-k>", ":m .-2<CR>==", desc = "Move Line Up" },
+	{ "<A-j>", ":m .+1<CR>==", desc = "Move Line Down" },
+}, { mode = { "n" } })
