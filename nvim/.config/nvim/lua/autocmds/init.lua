@@ -2,6 +2,7 @@
 require("autocmds.format.prettier")
 require("autocmds.format.shfmt")
 require("autocmds.format.stylua")
+require("autocmds.format.taplo")
 
 require("autocmds.terminal")
 require("autocmds.auto-source")
