@@ -25,10 +25,3 @@ wk.add({
 		desc = "Delete Word",
 	},
 })
-
--- move line up and down in normal, visual and insert mode
-wk.add({
-	mode = "n",
-	{ "<A-k>", ":m .-2<CR>==", desc = "Move Line Up" },
-	{ "<A-j>", ":m .+1<CR>==", desc = "Move Line Down" },
-})
