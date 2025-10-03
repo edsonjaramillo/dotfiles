@@ -30,7 +30,7 @@ return {
 					-- json
 					"jsonls",
 					-- toml
-					-- "tombi",
+					"taplo",
 				},
 			})
 		end,
