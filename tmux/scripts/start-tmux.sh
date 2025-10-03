@@ -1,61 +1,43 @@
 #!/usr/bin/env bash
-set -Eeuo pipefail
 
-# Functions
-needs_docker() {
-    if ! command -v docker &>/dev/null; then
-        return 1
-    fi
+# Get current directory name (basename of $PWD)
+base_name=$(basename "$PWD")
 
-    local ANY_DOCKERFILE
-    ANY_DOCKERFILE=$(find . -type f \( -iname "dockerfile*" -o -iname "docker-compose*.yml" -o -iname "docker-compose*.yaml" \) -print -quit)
-    if [ -n "$ANY_DOCKERFILE" ]; then
-        return 0
-    fi
+# Build possible tmux session names
+session_primary="${base_name}-primary"
+session_secondary="${base_name}-secondary"
 
-    return 1
-}
+# Use gum to let the user choose between them
+session_choice=$(echo -e "${session_primary}\n${session_secondary}" | gum choose)
 
-# Run the script
-run() {
+if [ -z "$session_choice" ]; then
+	echo "No session selected. Exiting."
+	exit 1
+fi
 
-    # Check that tmux is installed
-    if ! command -v tmux &>/dev/null; then
-        printf "tmux is not installed. Please install tmux and try again." >&2
-        exit 1
-    fi
+# Check if the selected session already exists
+if tmux has-session -t "$session_choice" 2>/dev/null; then
+	echo "Attaching to existing session: $session_choice"
+	sleep 2
+	tmux attach-session -t "$session_choice"
+	exit 0
+fi
 
-    # Determine session name based on current directory
-    session_name="${PWD##*/}"
+tmux new-session -d -t "$base_name" -s "$session_choice" -A
 
-    # If a tmux session with this name already exists, attach to it.
-    if tmux has-session -t "$session_name" 2>/dev/null; then
-        tmux attach-session -t "$session_name"
-        exit 0
-    fi
+echo "Created and attached to new session: $session_choice"
 
-    # Create new session with a window named "shells"
-    tmux new-session -d -s "$session_name" -c "$PWD" -n "shells"
-    tmux send-keys -t "$session_name:shells" "clear" C-m
+# Rename the first window to "editor"
+tmux rename-window -t "$base_name:1" "editor"
+tmux send-keys -t "$base_name:editor" "nvim" C-m
 
-    # Split the window -- and run yazi in it.
-    tmux split-window -v -t "$session_name:shells"
-    tmux resize-pane -t "$session_name:shells" -D 5
-    tmux send-keys -t "$session_name:shells" "yazi" C-m
+tmux new-window -d -t "$base_name" -n "shells" -c "$PWD"
+tmux split-window -h -t "$base_name:shells" -c "$PWD"
 
-    if needs_docker; then
-        tmux new-window -d -t "$session_name:" -n "docker" -c "$PWD"
-        tmux send-keys -t "$session_name:docker" "lazydocker" C-m
-    fi
+# If git exists and .git directory exists, create a git window
+if command -v git &>/dev/null && [ -d ".git" ]; then
+	tmux new-window -d -t "$base_name" -n "git" -c "$PWD"
+	tmux send-keys -t "$base_name:git" "lazygit" C-m
+fi
 
-    # If git is installed and the .git directory exists, create a new window named "git" and run lazygit in it.
-    if command -v git &>/dev/null && [ -d ".git" ]; then
-        tmux new-window -d -t "$session_name:" -n "git" -c "$PWD"
-        tmux send-keys -t "$session_name:git" "lazygit" C-m
-    fi
-
-    # Finally, attach to the newly created session.
-    tmux attach-session -t "$session_name"
-}
-
-run
+tmux attach-session -t "$session_choice"
