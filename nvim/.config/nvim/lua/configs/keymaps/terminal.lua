@@ -1,6 +1,7 @@
 local wk = require("which-key")
 
 wk.add({
+	mode = "n",
 	{
 		"<leader>t",
 		group = "Terminal",
@@ -10,4 +11,4 @@ wk.add({
 		"<cmd>ToggleTerm<CR>",
 		desc = "Toggle Terminal (ToggleTerm)",
 	},
-}, { mode = "n" })
+})

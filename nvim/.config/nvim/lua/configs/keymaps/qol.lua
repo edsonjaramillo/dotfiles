@@ -11,6 +11,7 @@ end
 
 -- better delete word in normal mode
 wk.add({
+	mode = "n",
 	{
 		"<C-w>",
 		function()
@@ -23,10 +24,11 @@ wk.add({
 		end,
 		desc = "Delete Word",
 	},
-}, { mode = { "n" } })
+})
 
 -- move line up and down in normal, visual and insert mode
 wk.add({
+	mode = "n",
 	{ "<A-k>", ":m .-2<CR>==", desc = "Move Line Up" },
 	{ "<A-j>", ":m .+1<CR>==", desc = "Move Line Down" },
-}, { mode = { "n" } })
+})

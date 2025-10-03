@@ -19,6 +19,7 @@ Please provide documentation for the following code. :
 ]]
 
 wk.add({
+	mode = "x",
 	{ "<leader>a", group = "AI" },
 	{
 		"<leader>ae",
@@ -50,9 +51,10 @@ wk.add({
 		end,
 		desc = "Document Code",
 	},
-}, { mode = "v" })
+})
 
 wk.add({
+	mode = "n",
 	{
 		"<leader>a",
 		group = "AI",
@@ -67,4 +69,4 @@ wk.add({
 		end,
 		desc = "Git Commit Message",
 	},
-}, { mode = "n" })
+})

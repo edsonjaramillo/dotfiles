@@ -2,6 +2,7 @@ local snacks = require("snacks")
 local wk = require("which-key")
 
 wk.add({
+	mode = "n",
 	{
 		"<leader>f",
 		group = "Finder",
@@ -38,4 +39,4 @@ wk.add({
 		end,
 		desc = "Plugin Files (Snacks)",
 	},
-}, { mode = "n" })
+})

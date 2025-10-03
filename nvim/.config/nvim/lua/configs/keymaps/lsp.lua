@@ -2,6 +2,7 @@ local snacks = require("snacks")
 local wk = require("which-key")
 
 wk.add({
+	mode = "n",
 	{
 		"<leader>l",
 		group = "LSP",
@@ -51,4 +52,4 @@ wk.add({
 		}),
 		desc = "Hover (LSP)",
 	},
-}, { mode = "n" })
+})
