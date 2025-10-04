@@ -1,28 +1,28 @@
 return {
-	-- {
-	-- 	"github/copilot.vim",
-	-- 	config = function()
-	-- 		vim.g.copilot_filetypes = {
-	-- 			["copilot-chat"] = false,
-	-- 		}
-	-- 	end,
-	-- },
 	{
-		"zbirenbaum/copilot.lua",
-		event = "InsertEnter",
-		dependencies = {
-			"copilotlsp-nvim/copilot-lsp",
-		},
-		cmd = "Copilot",
-		opts = {},
+		"github/copilot.vim",
 		config = function()
-			require("copilot").setup({
-				suggestion = {
-					auto_trigger = true,
-				},
-			})
+			vim.g.copilot_filetypes = {
+				["copilot-chat"] = false,
+			}
 		end,
 	},
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	event = "InsertEnter",
+	-- 	dependencies = {
+	-- 		"copilotlsp-nvim/copilot-lsp",
+	-- 	},
+	-- 	cmd = "Copilot",
+	-- 	opts = {},
+	-- 	config = function()
+	-- 		require("copilot").setup({
+	-- 			suggestion = {
+	-- 				auto_trigger = true,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		{
 			"CopilotC-Nvim/CopilotChat.nvim",
