@@ -31,7 +31,7 @@ wk.add({
 	{
 		"<leader>sg",
 		function()
-			snacks.picker.grep({ hidden = true })
+			snacks.picker.grep({ hidden = true, exclude = { "node_modules", ".git", "dist" } })
 		end,
 		desc = "Grep (Snacks)",
 	},

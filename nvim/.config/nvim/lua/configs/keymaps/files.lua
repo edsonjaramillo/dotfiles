@@ -13,7 +13,10 @@ wk.add({
 			-- if cwd is ~/dotfiles, show hidden files
 			local cwd = vim.fn.getcwd()
 			local is_dotfiles = cwd == vim.fn.expand("~") .. "/dotfiles"
-			snacks.picker.files({ hidden = is_dotfiles })
+			snacks.picker.files({
+				hidden = is_dotfiles,
+				exclude = { "node_modules", ".git", "dist" },
+			})
 		end,
 		desc = "Find Files (Snacks)",
 	},
