@@ -10,13 +10,23 @@ return {
 				"vim",
 				"vimdoc",
 				"lua",
+				-- shell
 				"bash",
+				-- web
+				"css",
+				"html",
 				"javascript",
-				"tsx",
 				"typescript",
+				"tsx",
+				-- programming
 				"python",
-				"tmux",
+				-- config
+				"json",
+				"jsonc",
+				"markdown",
 				"toml",
+				"tmux",
+				"yaml",
 			},
 		},
 		config = function(_, opts)

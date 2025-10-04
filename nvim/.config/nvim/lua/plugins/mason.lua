@@ -31,6 +31,9 @@ return {
 					"jsonls",
 					-- toml
 					"taplo",
+					--yaml
+					"yamlls",
+					"yamlfmt",
 				},
 			})
 		end,
