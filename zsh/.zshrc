@@ -27,3 +27,10 @@ source <(fnm completions --shell zsh)
 # zoxide
 eval "$(zoxide init zsh)"
 [[ -f "$HOME/.zoxide/zoxide.sh" ]] && source "$HOME/.zoxide/zoxide.sh"
+
+# pnpm
+export PNPM_HOME="/Users/edsonjaramillo/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
