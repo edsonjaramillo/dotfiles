@@ -21,13 +21,6 @@ wk.add({
 		desc = "Find Files (Snacks)",
 	},
 	{
-		"<leader>fb",
-		function()
-			snacks.picker.buffers()
-		end,
-		desc = "Find Buffers (Snacks)",
-	},
-	{
 		"<leader>fc",
 		function()
 			snacks.picker.files({ cwd = vim.fn.stdpath("config"), hidden = true })

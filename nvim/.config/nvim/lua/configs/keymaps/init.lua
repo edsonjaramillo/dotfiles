@@ -1,4 +1,5 @@
 require("configs.keymaps.ai")
+require("configs.keymaps.buffer")
 require("configs.keymaps.explorer")
 require("configs.keymaps.files")
 require("configs.keymaps.lsp")
