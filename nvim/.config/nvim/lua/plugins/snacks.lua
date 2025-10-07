@@ -1,6 +1,6 @@
-local files_utils = require("helpers.files-utils")
-local oil_utils = require("helpers.oil-utils")
-local snacks_utils = require("helpers.snacks-utils")
+local files_helper = require("helpers.files-helpers")
+local oil_helper = require("helpers.oil-helpers")
+local snacks_helper = require("helpers.snacks-helpers")
 
 return {
 	{
@@ -16,8 +16,8 @@ return {
 							desc = "Find File",
 							action = function()
 								require("snacks").picker.files({
-									hidden = files_utils.is_dotfiles,
-									exclude = snacks_utils.folder_exclude,
+									hidden = files_helper.is_dotfiles,
+									exclude = snacks_helper.folder_exclude,
 								})
 							end,
 						},
@@ -27,7 +27,7 @@ return {
 							desc = "Recent Files",
 							action = function()
 								require("snacks").picker.recent({
-									filter = { paths = snacks_utils.priotize_cwd },
+									filter = { paths = snacks_helper.priotize_cwd },
 									matcher = { cwd_bonus = true },
 								})
 							end,
@@ -38,7 +38,7 @@ return {
 							desc = "Live Grep",
 							action = function()
 								require("snacks").picker.grep({
-									hidden = files_utils.is_dotfiles,
+									hidden = files_helper.is_dotfiles,
 									matcher = { cwd_bonus = true },
 								})
 							end,
@@ -48,10 +48,10 @@ return {
 							key = "e",
 							desc = "Oil Explorer",
 							action = function()
-								if files_utils.is_dotfiles then
-									oil_utils.enable_hidden()
+								if files_helper.is_dotfiles then
+									oil_helper.enable_hidden()
 								else
-									oil_utils.disable_hidden()
+									oil_helper.disable_hidden()
 								end
 								require("oil").open()
 							end,

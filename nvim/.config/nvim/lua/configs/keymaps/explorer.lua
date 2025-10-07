@@ -1,6 +1,6 @@
-local files_utils = require("helpers.files-utils")
+local files_helper = require("helpers.files-helpers")
 local oil = require("oil")
-local oil_utils = require("helpers.oil-utils")
+local oil_helper = require("helpers.oil-helpers")
 local wk = require("which-key")
 
 wk.add({
@@ -8,10 +8,10 @@ wk.add({
 	{
 		"<leader>e",
 		function()
-			if files_utils.is_dotfiles then
-				oil_utils.enable_hidden()
+			if files_helper.is_dotfiles then
+				oil_helper.enable_hidden()
 			else
-				oil_utils.disable_hidden()
+				oil_helper.disable_hidden()
 			end
 			oil.open()
 		end,

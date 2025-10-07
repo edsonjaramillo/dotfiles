@@ -1,4 +1,4 @@
-local files_utils = require("helpers.files-utils")
+local files_helper = require("helpers.files-helpers")
 local wk = require("which-key")
 
 wk.add({
@@ -49,7 +49,7 @@ wk.add({
 			require("grug-far").with_visual_selection({
 				prefills = {
 					paths = cwd,
-					flags = files_utils.is_dotfiles and "--hidden" or nil,
+					flags = files_helper.is_dotfiles and "--hidden" or nil,
 				},
 			})
 		end,

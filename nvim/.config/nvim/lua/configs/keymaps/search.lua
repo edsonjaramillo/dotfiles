@@ -1,4 +1,4 @@
-local snack_helpers = require("helpers.snacks-utils")
+local snack_helpers = require("helpers.snacks-helpers")
 local snacks = require("snacks")
 local wk = require("which-key")
 

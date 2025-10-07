@@ -1,6 +1,6 @@
-local files_utils = require("helpers.files-utils")
+local files_helper = require("helpers.files-helpers")
 local snacks = require("snacks")
-local snacks_utils = require("helpers.snacks-utils")
+local snacks_helper = require("helpers.snacks-helpers")
 local wk = require("which-key")
 
 wk.add({
@@ -13,8 +13,8 @@ wk.add({
 		"<leader>ff",
 		function()
 			snacks.picker.files({
-				hidden = files_utils.is_dotfiles,
-				exclude = snacks_utils.folder_exclude,
+				hidden = files_helper.is_dotfiles,
+				exclude = snacks_helper.folder_exclude,
 			})
 		end,
 		desc = "Find Files (Snacks)",
@@ -23,7 +23,7 @@ wk.add({
 		"<leader>fr",
 		function()
 			snacks.picker.recent({
-				filter = { paths = { snacks_utils.priotize_cwd } },
+				filter = { paths = { snacks_helper.priotize_cwd } },
 				matcher = {
 					cwd_bonus = true,
 				},
