@@ -13,7 +13,7 @@ wk.add({
 			else
 				oil.setup({ view_options = { show_hidden = false } })
 			end
-			oil.open(".")
+			oil.open()
 		end,
 		desc = "Open Explorer (Oil)",
 	},
