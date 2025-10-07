@@ -1,4 +1,5 @@
 local files_utils = require("helpers.files-utils")
+local oil_utils = require("helpers.oil-utils")
 local snacks_utils = require("helpers.snacks-utils")
 
 return {
@@ -48,9 +49,9 @@ return {
 							desc = "Oil Explorer",
 							action = function()
 								if files_utils.is_dotfiles then
-									snacks_utils.enable_hidden()
+									oil_utils.enable_hidden()
 								else
-									snacks_utils.disable_hidden()
+									oil_utils.disable_hidden()
 								end
 								require("oil").open()
 							end,
