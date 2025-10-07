@@ -21,6 +21,17 @@ wk.add({
 		desc = "Find Files (Snacks)",
 	},
 	{
+		"<leader>fr",
+		function()
+			snacks.picker.recent({
+				filter = { paths = { [vim.fn.getcwd()] = true } },
+				matcher = {
+					cwd_bonus = true,
+				},
+			})
+		end,
+	},
+	{
 		"<leader>fc",
 		function()
 			snacks.picker.files({ cwd = vim.fn.stdpath("config"), hidden = true })
