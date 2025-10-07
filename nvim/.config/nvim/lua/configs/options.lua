@@ -8,7 +8,6 @@ local o = vim.opt
 o.relativenumber = true -- Show relative line numbers (great for motions)
 o.cursorline = true -- Highlight the current line
 o.signcolumn = "yes" -- Always show sign column (prevents text shift)
-o.colorcolumn = "100" -- Visual guide for code width (adjust to taste)
 o.wrap = false -- Do not soft-wrap long lines
 o.linebreak = true -- If wrap is on, break at word boundaries
 o.scrolloff = 8 -- Keep 8 lines visible above/below cursor
