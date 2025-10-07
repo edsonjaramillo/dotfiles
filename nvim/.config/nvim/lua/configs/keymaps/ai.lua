@@ -69,4 +69,18 @@ wk.add({
 		end,
 		desc = "Git Commit Message",
 	},
+	{
+		"<leader>ao",
+		function()
+			require("CopilotChat").open()
+		end,
+		desc = "Open Chat",
+	},
+	{
+		"<leader>aw",
+		function()
+			require("CopilotChat").close()
+		end,
+		desc = "Close Chat",
+	},
 })
