@@ -8,9 +8,6 @@ M.folder_exclude = { "node_modules", ".git", "dist" }
 -- original typo for backwards compatibility.
 M.priotize_cwd = { [vim.fn.getcwd()] = true }
 
--- Detect whether the current working directory is the user's dotfiles repo.
-M.is_dotfiles = vim.fn.getcwd() == vim.fn.expand("~") .. "/dotfiles"
-
 -- Enable showing hidden files in the 'oil' file browser.
 -- Requires the 'oil' plugin to be installed and in Lua's package path.
 --- @return nil

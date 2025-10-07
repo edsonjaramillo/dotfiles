@@ -1,3 +1,4 @@
+local files_utils = require("helpers.files-utils")
 local oil = require("oil")
 local wk = require("which-key")
 
@@ -6,9 +7,7 @@ wk.add({
 	{
 		"<leader>e",
 		function()
-			local cwd = vim.fn.getcwd()
-			local is_dotfiles = cwd == vim.fn.expand("~") .. "/dotfiles"
-			if is_dotfiles then
+			if files_utils.is_dotfiles then
 				oil.setup({ view_options = { show_hidden = true } })
 			else
 				oil.setup({ view_options = { show_hidden = false } })

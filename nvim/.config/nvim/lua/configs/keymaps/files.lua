@@ -1,3 +1,4 @@
+local files_utils = require("helpers.files-utils")
 local snacks = require("snacks")
 local snacks_utils = require("helpers.snacks-utils")
 local wk = require("which-key")
@@ -11,9 +12,8 @@ wk.add({
 	{
 		"<leader>ff",
 		function()
-			-- if cwd is ~/dotfiles, show hidden files
 			snacks.picker.files({
-				hidden = snacks_utils.is_dotfiles,
+				hidden = files_utils.is_dotfiles,
 				exclude = snacks_utils.folder_exclude,
 			})
 		end,
@@ -37,7 +37,6 @@ wk.add({
 		end,
 		desc = "Config Files (Snacks)",
 	},
-	-- snacks file picker where cwd is ~/code/nvim-plugins/
 	{
 		"<leader>fp",
 		function()
