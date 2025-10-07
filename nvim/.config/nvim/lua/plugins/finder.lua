@@ -1,3 +1,5 @@
+local snacks_utils = require("helpers.snacks-utils")
+
 return {
 	{
 		"folke/snacks.nvim",
@@ -11,11 +13,9 @@ return {
 							key = "f",
 							desc = "Find File",
 							action = function()
-								local cwd = vim.fn.getcwd()
-								local is_dotfiles = cwd == vim.fn.expand("~") .. "/dotfiles"
 								require("snacks").picker.files({
-									hidden = is_dotfiles,
-									exclude = { "node_modules", ".git", "dist" },
+									hidden = snacks_utils.is_dotfiles,
+									exclude = snacks_utils.folder_exclude,
 								})
 							end,
 						},
@@ -25,10 +25,8 @@ return {
 							desc = "Recent Files",
 							action = function()
 								require("snacks").picker.recent({
-									filter = { paths = { [vim.fn.getcwd()] = true } },
-									matcher = {
-										cwd_bonus = true,
-									},
+									filter = { paths = snacks_utils.priotize_cwd },
+									matcher = { cwd_bonus = true },
 								})
 							end,
 						},
@@ -37,13 +35,9 @@ return {
 							key = "g",
 							desc = "Live Grep",
 							action = function()
-								local cwd = vim.fn.getcwd()
-								local is_dotfiles = cwd == vim.fn.expand("~") .. "/dotfiles"
 								require("snacks").picker.grep({
-									hidden = is_dotfiles,
-									matcher = {
-										cwd_bonus = true,
-									},
+									hidden = snacks_utils.is_dotfiles,
+									matcher = { cwd_bonus = true },
 								})
 							end,
 						},
@@ -52,16 +46,12 @@ return {
 							key = "e",
 							desc = "Oil Explorer",
 							action = function()
-								local cwd = vim.fn.getcwd()
-								local is_dotfiles = cwd == vim.fn.expand("~") .. "/dotfiles"
-
-								local oil = require("oil")
-								if is_dotfiles then
-									oil.setup({ view_options = { show_hidden = true } })
+								if snacks_utils.is_dotfiles then
+									snacks_utils.enable_hidden()
 								else
-									oil.setup({ view_options = { show_hidden = false } })
+									snacks_utils.disable_hidden()
 								end
-								oil.open(".")
+								require("oil").open()
 							end,
 						},
 						{

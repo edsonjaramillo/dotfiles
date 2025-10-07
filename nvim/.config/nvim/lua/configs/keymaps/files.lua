@@ -1,4 +1,5 @@
 local snacks = require("snacks")
+local snacks_utils = require("helpers.snacks-utils")
 local wk = require("which-key")
 
 wk.add({
@@ -11,11 +12,9 @@ wk.add({
 		"<leader>ff",
 		function()
 			-- if cwd is ~/dotfiles, show hidden files
-			local cwd = vim.fn.getcwd()
-			local is_dotfiles = cwd == vim.fn.expand("~") .. "/dotfiles"
 			snacks.picker.files({
-				hidden = is_dotfiles,
-				exclude = { "node_modules", ".git", "dist" },
+				hidden = snacks_utils.is_dotfiles,
+				exclude = snacks_utils.folder_exclude,
 			})
 		end,
 		desc = "Find Files (Snacks)",
@@ -24,7 +23,7 @@ wk.add({
 		"<leader>fr",
 		function()
 			snacks.picker.recent({
-				filter = { paths = { [vim.fn.getcwd()] = true } },
+				filter = { paths = { snacks_utils.priotize_cwd } },
 				matcher = {
 					cwd_bonus = true,
 				},

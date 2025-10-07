@@ -1,3 +1,4 @@
+local snack_helpers = require("helpers.snacks-utils")
 local snacks = require("snacks")
 local wk = require("which-key")
 
@@ -31,7 +32,7 @@ wk.add({
 	{
 		"<leader>sg",
 		function()
-			snacks.picker.grep({ hidden = true, exclude = { "node_modules", ".git", "dist" } })
+			snacks.picker.grep({ hidden = true, exclude = snack_helpers.folder_exclude })
 		end,
 		desc = "Grep (Snacks)",
 	},
