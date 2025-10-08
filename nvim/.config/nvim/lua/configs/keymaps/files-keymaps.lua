@@ -23,12 +23,11 @@ wk.add({
 		"<leader>fr",
 		function()
 			snacks.picker.recent({
-				filter = { paths = { snacks_helper.priotize_cwd } },
-				matcher = {
-					cwd_bonus = true,
-				},
+				filter = { paths = snacks_helper.priotize_cwd },
+				matcher = { cwd_bonus = true },
 			})
 		end,
+		desc = "Recent Files (Snacks)",
 	},
 	{
 		"<leader>fc",
