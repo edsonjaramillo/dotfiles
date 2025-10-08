@@ -22,6 +22,11 @@ wk.add({
 		desc = "Close Spectre",
 	},
 	{
+		"<leader>rw",
+		[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+		desc = "Replace Word Under Cursor",
+	},
+	{
 		"<leader>rpv",
 		function()
 			require("grug-far").open({

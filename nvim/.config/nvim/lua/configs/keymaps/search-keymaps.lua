@@ -58,11 +58,6 @@ wk.add({
 		desc = "Commands (Snacks)",
 	},
 	{
-		"<leader>sr",
-		[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-		desc = "Replace Word Under Cursor",
-	},
-	{
 		"<leader>sx",
 		"<cmd>nohlsearch<CR>",
 		desc = "Clear search highlight",
