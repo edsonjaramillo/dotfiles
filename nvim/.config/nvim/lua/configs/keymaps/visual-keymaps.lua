@@ -44,3 +44,14 @@ wk.add({
 	{ "<A-k>", ":m '<-2<CR>gv=gv", desc = "Move Line Up" },
 	{ "<A-j>", ":m '>+1<CR>gv=gv", desc = "Move Line Down" },
 })
+
+-- Add sort functionality
+wk.add({
+	mode = "x",
+	{ "<leader>sa", ":'<,'>sort<CR>", desc = "Sort Ascending" },
+	{ "<leader>sd", ":'<,'>sort!<CR>", desc = "Sort Descending" },
+	{ "<leader>su", ":'<,'>sort u<CR>", desc = "Sort Unique" },
+	{ "<leader>sn", ":'<,'>sort n<CR>", desc = "Sort Numerically" },
+	{ "<leader>sr", ":'<,'>sort r<CR>", desc = "Sort Reverse" },
+	{ "<leader>si", ":'<,'>sort i<CR>", desc = "Sort Ignore Case" },
+})
