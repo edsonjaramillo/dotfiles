@@ -18,6 +18,10 @@ local Documentation_prompt = [[
 Please provide documentation for the following code. :
 ]]
 
+local Type_prompt = [[
+Please provide type annotations for the following code. :
+]]
+
 wk.add({
 	mode = "x",
 	{ "<leader>a", group = "AI" },
@@ -50,6 +54,16 @@ wk.add({
 			})
 		end,
 		desc = "Document Code",
+	},
+	{
+		"<leader>at",
+		function()
+			require("CopilotChat").ask(Type_prompt, {
+				model = "gpt-5-mini",
+				sticky = { "#selection" },
+			})
+		end,
+		desc = "Type Annotations",
 	},
 })
 
