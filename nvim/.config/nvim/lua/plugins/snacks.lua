@@ -2,6 +2,8 @@ local files_helper = require("helpers.files-helpers")
 local oil_helper = require("helpers.oil-helpers")
 local snacks_helper = require("helpers.snacks-helpers")
 
+---@module 'lazy'
+---@type LazySpec[]
 return {
 	{
 		"folke/snacks.nvim",
