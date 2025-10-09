@@ -37,13 +37,6 @@ wk.add({
 		desc = "Grep (Snacks)",
 	},
 	{
-		"<leader>ss",
-		function()
-			snacks.picker.lines()
-		end,
-		desc = "Jumps (Snacks)",
-	},
-	{
 		"<leader>sk",
 		function()
 			snacks.picker.keymaps()
