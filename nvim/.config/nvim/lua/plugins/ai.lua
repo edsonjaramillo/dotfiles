@@ -2,30 +2,14 @@
 ---@type LazySpec[]
 return {
 	{
-		"github/copilot.vim",
-		config = function()
-			vim.g.copilot_filetypes = {
-				["copilot-chat"] = false,
-			}
-		end,
-	},
-	-- {
-	-- 	"zbirenbaum/copilot.lua",
-	-- 	event = "InsertEnter",
-	-- 	dependencies = {
-	-- 		"copilotlsp-nvim/copilot-lsp",
-	-- 	},
-	-- 	cmd = "Copilot",
-	-- 	opts = {},
-	-- 	config = function()
-	-- 		require("copilot").setup({
-	-- 			suggestion = {
-	-- 				auto_trigger = true,
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
-	{
+		"zbirenbaum/copilot.lua",
+		event = "InsertEnter",
+		cmd = "Copilot",
+		opts = {
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+			filetypes = { markdown = true, help = true },
+		},
 		{
 			"CopilotC-Nvim/CopilotChat.nvim",
 			dependencies = {

@@ -1,3 +1,44 @@
+---@class LazyDevPlugin
+---@field default string
+---@field provider blink.cmp.SourceProviderConfigPartial
+
+---@type LazyDevPlugin
+local lazyDevPlugin = {
+	default = "lazydev",
+	provider = {
+		name = "LazyDev",
+		module = "lazydev.integrations.blink",
+		score_offset = 100,
+	},
+}
+
+---@type LazyDevPlugin
+local npmPlugin = {
+	default = "npm",
+	provider = {
+		name = "npm",
+		module = "blink-cmp-npm",
+		score_offset = 100,
+		opts = {
+			only_latest_version = true,
+		},
+		should_show_items = function()
+			return vim.fn.expand("%:t") == "package.json"
+		end,
+	},
+}
+
+---@type LazyDevPlugin
+local copilotPlugin = {
+	default = "copilot",
+	provider = {
+		name = "copilot",
+		module = "blink-copilot",
+		score_offset = 100,
+		async = true,
+	},
+}
+
 ---@module 'lazy'
 ---@type LazySpec[]
 return {
@@ -14,25 +55,29 @@ return {
 	},
 	{ -- optional blink completion source for require statements and module annotations
 		"saghen/blink.cmp",
-		dependencies = { "rafamadriz/friendly-snippets" },
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			"alexandre-abrioux/blink-cmp-npm.nvim",
+			"fang2hou/blink-copilot",
+		},
 		version = "1.*",
+		---@module 'blink-cmp'
+		---@type blink.cmp.Config
 		opts = {
 			sources = {
-				-- add lazydev to your completion providers
 				default = {
-					"lazydev",
+					copilotPlugin.default,
+					lazyDevPlugin.default,
+					npmPlugin.default,
 					"lsp",
 					"path",
 					"snippets",
 					"buffer",
 				},
 				providers = {
-					lazydev = {
-						name = "LazyDev",
-						module = "lazydev.integrations.blink",
-						-- make lazydev completions top priority (see `:h blink.cmp`)
-						score_offset = 100,
-					},
+					lazydev = lazyDevPlugin.provider,
+					npm = npmPlugin.provider,
+					copilot = copilotPlugin.provider,
 				},
 			},
 			completion = {
