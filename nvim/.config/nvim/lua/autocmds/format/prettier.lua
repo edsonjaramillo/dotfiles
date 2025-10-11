@@ -31,6 +31,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		if prettier_config then
 			table.insert(argv, "--config")
 			table.insert(argv, prettier_config)
+		else
+			table.insert(argv, "--use-tabs")
 		end
 
 		local filename = prettier:get_filename()
