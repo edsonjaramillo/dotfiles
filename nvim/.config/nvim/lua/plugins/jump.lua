@@ -6,6 +6,10 @@ return {
 		event = "VeryLazy",
 		---@module 'flash'
 		---@type Flash.Config
-		opts = {},
+		opts = {
+			search = {
+				mode = "search",
+			},
+		},
 	},
 }
