@@ -1,0 +1,26 @@
+{
+	"lazyspecmultiple": {
+		"prefix": "lazyspecmultiple",
+		"body": [
+			"---@module 'lazy'",
+			"---@type LazySpec[]",
+			"return {",
+			"{",
+			"${1:'author/plugin-name'},",
+			"}",
+			"}"
+		],
+		"description": "lazyspec multiple"
+	},
+	"lazyspecsingle": {
+		"prefix": "lazyspecsingle",
+		"body": [
+			"---@module 'lazy'",
+			"---@type LazySpec",
+			"return {",
+			"${1:'author/plugin-name'},",
+			"}"
+		],
+		"description": "lazyspec single"
+	}
+}

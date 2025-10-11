@@ -58,6 +58,14 @@ return {
 		dependencies = {
 			"rafamadriz/friendly-snippets",
 			"alexandre-abrioux/blink-cmp-npm.nvim",
+			{
+				"L3MON4D3/LuaSnip",
+				tag = "v2.4.0",
+				run = "make install_jsregexp",
+				config = function()
+					require("luasnip.loaders.from_vscode").lazy_load()
+				end,
+			},
 			"fang2hou/blink-copilot",
 		},
 		version = "1.*",
