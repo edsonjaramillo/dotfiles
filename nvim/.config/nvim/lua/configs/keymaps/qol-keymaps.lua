@@ -10,6 +10,12 @@ for _, key in ipairs(esc_keys) do
 	})
 end
 
+wk.add({
+	"<leader>i",
+	":source $MYVIMRC<CR>:luafile %<CR>",
+	desc = "Source $MYVIMRC and Luafile Current File",
+})
+
 -- print commands
 wk.add({
 	mode = "n",
