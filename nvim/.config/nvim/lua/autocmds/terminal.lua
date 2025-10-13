@@ -12,21 +12,3 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = [[term://*]],
 	callback = set_terminal_keymaps,
 })
-
--- remove line numbers in terminals
-vim.api.nvim_create_autocmd("TermOpen", {
-	pattern = [[term://*]],
-	callback = function()
-		vim.wo.number = false
-		vim.wo.relativenumber = false
-		vim.wo.signcolumn = "no"
-	end,
-})
-
--- start terminal in insert mode
-vim.api.nvim_create_autocmd("TermOpen", {
-	pattern = [[term://*]],
-	callback = function()
-		vim.cmd.startinsert()
-	end,
-})
