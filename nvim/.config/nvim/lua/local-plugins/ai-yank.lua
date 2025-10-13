@@ -26,7 +26,7 @@ end
 M.yank_commit_message = function(record_id, notify_title)
 	local copilot_chat_bufnr = get_copilot_chat_bufnr()
 	if not copilot_chat_bufnr then
-		notify("No Copilot Chat buffer found", vim.log.levels.ERROR, {
+		notify.notify("No Copilot Chat buffer found", "ERROR", {
 			replace = record_id,
 			title = notify_title,
 			timeout = 1000,
@@ -63,7 +63,7 @@ M.yank_commit_message = function(record_id, notify_title)
 	local formatted_message = table.concat(commit_message_lines, "\n")
 
 	vim.fn.setreg("+", formatted_message)
-	notify("Commit message yanked to system clipboard", vim.log.levels.INFO, {
+	notify.notify("Commit message yanked to system clipboard", "INFO", {
 		replace = record_id,
 		title = notify_title,
 		timeout = 1000,
