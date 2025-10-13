@@ -8,6 +8,15 @@ return {
 		opts = {
 			highlight = { enable = true },
 			indent = { enable = true },
+			textobjects = {
+				select = {
+					enable = true,
+					keymaps = {
+						["af"] = "@function.outer",
+						["if"] = "@function.inner",
+					},
+				},
+			},
 			ensure_installed = {
 				"vim",
 				"vimdoc",
@@ -37,5 +46,13 @@ return {
 	},
 	{
 		"artemave/workspace-diagnostics.nvim",
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = {},
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end,
 	},
 }
