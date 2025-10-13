@@ -1,3 +1,4 @@
+local notify = require("notify")
 local wk = require("which-key")
 
 local commit_prompt = [[
@@ -76,10 +77,21 @@ wk.add({
 	{
 		"<leader>ac",
 		function()
-			require("CopilotChat").ask(commit_prompt, {
+			local notifyTitle = "Copilot Commit Message"
+			local record = notify("Generating commit message...", "info", {
+				title = notifyTitle,
+				timeout = false,
+			})
+			local copilot = require("CopilotChat")
+			copilot.ask(commit_prompt, {
 				model = "gpt-5-mini",
 				sticky = { "#git:staged", "#gitdiff:staged" },
+				callback = function()
+					require("local-plugins.ai-yank").yank_commit_message(record.id, notifyTitle)
+				end,
 			})
+			copilot.reset()
+			copilot.close()
 		end,
 		desc = "Git Commit Message",
 	},
