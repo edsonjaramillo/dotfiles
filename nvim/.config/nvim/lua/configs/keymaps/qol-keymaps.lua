@@ -61,4 +61,54 @@ wk.add({
 		end,
 		desc = "Flash Jump",
 	},
+	{
+		"<C-b>",
+		function()
+			vim.cmd("normal! b")
+		end,
+		desc = "Move cursor to previous word",
+	},
+	{
+		"<C-w>",
+		function()
+			vim.cmd("normal! w")
+		end,
+		desc = "Move to next word",
+	},
+	{
+		"<C-d>",
+		function()
+			vim.cmd("normal! db")
+		end,
+		desc = "Delete previous word",
+	},
+	{
+		"<C-l>",
+		function()
+			vim.cmd("normal! _D")
+		end,
+		desc = "Delete to end of line",
+	},
+	{
+		"<C-[>",
+		function()
+			vim.diagnostic.jump({ count = -1 })
+		end,
+		desc = "Go to previous diagnostic",
+	},
+	{
+		"<C-]>",
+		function()
+			vim.diagnostic.jump({ count = 1 })
+		end,
+		desc = "Go to next diagnostic",
+	},
+	{
+		"<C-c>",
+		function()
+			vim.cmd("normal! ciw")
+			vim.cmd("normal! l")
+		end,
+		desc = "Change inner word and move cursor to the right",
+	},
 })
