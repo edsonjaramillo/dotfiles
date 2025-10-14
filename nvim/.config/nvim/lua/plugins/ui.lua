@@ -10,4 +10,10 @@ return {
 			"rcarriga/nvim-notify",
 		},
 	},
+	{
+		"norcalli/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
 }
