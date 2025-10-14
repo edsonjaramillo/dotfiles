@@ -31,3 +31,34 @@ wk.add({
 		desc = "Print Debug Statement Under Cursor",
 	},
 })
+
+wk.add({
+	mode = "i",
+	{
+		"<C-h>",
+		"<Left>",
+		desc = "Move cursor left",
+	},
+	{
+		"<C-l>",
+		"<Right>",
+		desc = "Move cursor right",
+	},
+	{
+		"<C-j>",
+		"<Down>",
+		desc = "Move cursor down",
+	},
+	{
+		"<C-k>",
+		"<Up>",
+		desc = "Move cursor up",
+	},
+	{
+		"<C-s>",
+		function()
+			require("flash").jump()
+		end,
+		desc = "Flash Jump",
+	},
+})
