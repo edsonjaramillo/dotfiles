@@ -93,6 +93,7 @@ wk.add({
 		"<C-[>",
 		function()
 			vim.diagnostic.jump({ count = -1 })
+			vim.cmd("normal! zz")
 		end,
 		desc = "Go to previous diagnostic",
 	},
@@ -100,6 +101,7 @@ wk.add({
 		"<C-]>",
 		function()
 			vim.diagnostic.jump({ count = 1 })
+			vim.cmd("normal! zz")
 		end,
 		desc = "Go to next diagnostic",
 	},
@@ -110,5 +112,19 @@ wk.add({
 			vim.cmd("normal! l")
 		end,
 		desc = "Change inner word and move cursor to the right",
+	},
+	{
+		"<C-u>",
+		function()
+			vim.cmd("normal! u")
+		end,
+		desc = "Undo",
+	},
+	{
+		"<C-r>",
+		function()
+			vim.cmd("normal! <C-r>")
+		end,
+		desc = "Redo",
 	},
 })
