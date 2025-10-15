@@ -1,41 +1,196 @@
 #!/usr/bin/env bash
 
-# Get current directory name (basename of $PWD)
-base_name=$(basename "$PWD")
+set -euo pipefail
 
-# Build possible tmux session names
-session_primary="${base_name}-primary"
-session_secondary="${base_name}-secondary"
+# Dependencies
+readonly DEPS=("tmux" "fd" "gum")
+readonly CODE_DIR="${CODE_DIR:-$HOME/code}"
 
-# Use gum to let the user choose between them
-session_choice=$(echo -e "${session_primary}\n${session_secondary}" | gum choose)
+# Manually defined projects (add your custom paths here)
+readonly MANUAL_PROJECTS=(
+	"$HOME/dotfiles/"
+)
 
-if [ -z "$session_choice" ]; then
-	echo "No session selected. Exiting."
-	exit 1
-fi
+# Check dependencies
+check_dependencies() {
+	local missing=()
+	for dep in "${DEPS[@]}"; do
+		if ! command -v "$dep" &>/dev/null; then
+			missing+=("$dep")
+		fi
+	done
 
-# Check if the selected session already exists
-if tmux has-session -t "$session_choice" 2>/dev/null; then
-	echo "Attaching to existing session: $session_choice"
-	tmux attach-session -t "$session_choice"
-fi
+	if [ ${#missing[@]} -gt 0 ]; then
+		echo "Error: Missing dependencies: ${missing[*]}" >&2
+		echo "Please install them before running this script." >&2
+		exit 1
+	fi
+}
 
-tmux new-session -d -t "$base_name" -s "$session_choice" -A
+# Get all available projects
+get_all_projects() {
+	local projects=()
 
-echo "Created and attached to new session: $session_choice"
+	# Add manual projects from array
+	for project in "${MANUAL_PROJECTS[@]}"; do
+		if [ -d "$project" ]; then
+			projects+=("$project")
+		fi
+	done
 
-# Rename the first window to "editor"
-tmux rename-window -t "$base_name:1" "editor"
-tmux send-keys -t "$base_name:editor" "nvim" C-m
+	# Add projects found by fd
+	if [ -d "$CODE_DIR" ]; then
+		while IFS= read -r project; do
+			projects+=("$project")
+		done < <(
+			fd --type d --max-depth 2 --min-depth 2 \
+				--hidden --exclude .git . "$CODE_DIR" 2>/dev/null || true
+		)
+	fi
 
-tmux new-window -d -t "$base_name" -n "shells" -c "$PWD"
-tmux split-window -h -t "$base_name:shells" -c "$PWD"
+	# Remove duplicates and sort
+	printf '%s\n' "${projects[@]}" | sort -u
+}
 
-# If git exists and .git directory exists, create a git window
-if command -v git &>/dev/null && [ -d ".git" ]; then
-	tmux new-window -d -t "$base_name" -n "git" -c "$PWD"
-	tmux send-keys -t "$base_name:git" "lazygit" C-m
-fi
+# Create or attach to tmux session
+create_or_attach_session() {
+	local session_name="$1"
+	local working_dir="$2"
+	local needs_attachded="${3:-true}"
 
-tmux attach-session -t "$session_choice"
+	if tmux has-session -t "$session_name" 2>/dev/null; then
+		echo "Session '$session_name' already exists. Attaching..."
+		tmux attach-session -t "$session_name"
+		return 0
+	fi
+
+	# Create new session
+	tmux new-session -d -s "$session_name" -c "$working_dir"
+
+	# Setup editor window
+	tmux rename-window -t "$session_name:1" "editor"
+	tmux send-keys -t "$session_name:editor" "nvim" C-m
+
+	# Setup shells window with horizontal split
+	tmux new-window -d -t "$session_name" -n "shells" -c "$working_dir"
+	tmux split-window -h -t "$session_name:shells" -c "$working_dir"
+
+	if [ "$needs_attachded" = true ]; then
+		tmux attach-session -t "$session_name"
+	fi
+}
+
+# Open current workspace
+open_current_workspace() {
+	local session_name
+	session_name=$(basename "$PWD")
+	create_or_attach_session "$session_name" "$PWD"
+}
+
+# Select and attach to existing session
+open_existing_session() {
+	local sessions
+	sessions=$(tmux ls 2>/dev/null | awk -F: '{print $1}') || {
+		echo "No existing tmux sessions found."
+		return 1
+	}
+
+	local selected
+	selected=$(echo "$sessions" | gum choose --header "Select a session:")
+
+	if [ -n "$selected" ]; then
+		tmux attach-session -t "$selected"
+	else
+		echo "No session selected."
+		return 1
+	fi
+}
+
+# Create new session from project directory
+create_new_session() {
+	local projects
+	projects=$(get_all_projects)
+
+	if [ -z "$projects" ]; then
+		echo "No projects found." >&2
+		echo "Configure projects in:" >&2
+		echo "  - Script: MANUAL_PROJECTS array" >&2
+		echo "  - Auto-discover: $CODE_DIR" >&2
+		return 1
+	fi
+
+	local selected_path
+	selected_path=$(echo "$projects" | gum choose --header "Select a project:")
+
+	if [ -n "$selected_path" ]; then
+		local session_name
+		session_name=$(basename "$selected_path")
+		create_or_attach_session "$session_name" "$selected_path"
+	else
+		echo "No project selected."
+		return 1
+	fi
+}
+
+create_all_projects() {
+	local projects
+	projects=$(get_all_projects)
+
+	if [ -z "$projects" ]; then
+		echo "No projects found." >&2
+		return 1
+	fi
+
+	while IFS= read -r project; do
+		local session_name
+		session_name=$(basename "$project")
+		echo "Creating or attaching to session '$session_name' for project '$project'..."
+		create_or_attach_session "$session_name" "$project" false
+	done <<<"$projects"
+
+	echo "All sessions created."
+}
+
+# Main menu
+main() {
+	check_dependencies
+
+	local current_dir
+	current_dir=$(basename "$PWD")
+
+	local choice
+	choice=$(
+		gum choose \
+			--header "Tmux Session Manager" \
+			"Current Workspace: $current_dir" \
+			"Open existing session" \
+			"Create new session" \
+			"Create sessions for all projects" \
+			"Quit"
+	)
+
+	case "$choice" in
+	"Current Workspace: $current_dir")
+		open_current_workspace
+		;;
+	"Open existing session")
+		open_existing_session
+		;;
+	"Create new session")
+		create_new_session
+		;;
+	"Create sessions for all projects")
+		create_all_projects
+		;;
+	"Quit")
+		echo "Exiting..."
+		exit 0
+		;;
+	*)
+		echo "Invalid choice. Exiting..."
+		exit 1
+		;;
+	esac
+}
+
+main "$@"

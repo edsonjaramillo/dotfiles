@@ -36,7 +36,6 @@ return {
 				"jsonc",
 				"markdown",
 				"toml",
-				"tmux",
 				"yaml",
 			},
 		},
