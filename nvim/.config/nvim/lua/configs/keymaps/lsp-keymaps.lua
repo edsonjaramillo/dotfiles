@@ -1,4 +1,4 @@
-local snacks = require("snacks")
+local fzf = require("fzf-lua")
 local wk = require("which-key")
 
 wk.add({
@@ -8,23 +8,28 @@ wk.add({
 		group = "LSP",
 	},
 	{
+		"<leader>lR",
+		"<cmd>LspRestart<cr>",
+		desc = "Restart LSP",
+	},
+	{
 		"<leader>ld",
 		function()
-			snacks.picker.diagnostics()
+			fzf.lsp_document_diagnostics()
 		end,
 		desc = "Diagnostics (Snacks)",
+	},
+	{
+		"<leader>lD",
+		function()
+			fzf.lsp_workspace_diagnostics()
+		end,
+		desc = "Diagnostics (Workspace)",
 	},
 	{
 		"<leader>lr",
 		vim.lsp.buf.rename,
 		desc = "Rename (LSP)",
-	},
-	{
-		"<leader>lR",
-		function()
-			snacks.picker.lsp_references()
-		end,
-		desc = "References (Snacks)",
 	},
 	{
 		"K",
