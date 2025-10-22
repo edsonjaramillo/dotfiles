@@ -14,8 +14,12 @@ local patterns = { plugins_path, nvim_config_path }
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = patterns,
 	callback = function(s)
-		-- reload the file that was just saved
-		vim.cmd.luafile(s.file)
+		-- if filename is dev.lua do not source the file
+		if s.file:match("dev.lua$") then
+			return
+		end
+
+		vim.cmd("source " .. s.file)
 
 		-- if home is not nil then replace absolute path with ~ for better readability
 		if home then
