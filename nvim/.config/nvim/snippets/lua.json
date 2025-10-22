@@ -22,5 +22,9 @@
 			"}"
 		],
 		"description": "lazyspec single"
+	},
+	"module": {
+		"prefix": "module",
+		"body": ["local M = {}", "", "$1", "", "return M"]
 	}
 }
