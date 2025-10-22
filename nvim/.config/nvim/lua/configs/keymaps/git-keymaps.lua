@@ -1,4 +1,4 @@
-local snacks = require("snacks")
+local fzf = require("fzf-lua")
 local wk = require("which-key")
 
 wk.add({
@@ -36,5 +36,12 @@ wk.add({
 		"<leader>ghu",
 		":Gitsigns undo_stage_hunk<CR>",
 		desc = "Git Undo Stage Hunk",
+	},
+	{
+		"<leader>gs",
+		function()
+			fzf.git_status()
+		end,
+		desc = "Git Status (FZF)",
 	},
 })
