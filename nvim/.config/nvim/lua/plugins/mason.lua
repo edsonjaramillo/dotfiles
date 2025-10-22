@@ -19,6 +19,8 @@ return {
 					-- lua
 					"lua_ls",
 					"stylua",
+					-- copilot
+					"copilot",
 					-- bash
 					"bashls",
 					"shfmt",
