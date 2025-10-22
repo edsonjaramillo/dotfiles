@@ -6,7 +6,7 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("earthshine").setup()
+			vim.cmd.colorscheme("earthshine")
 		end,
 	},
 }

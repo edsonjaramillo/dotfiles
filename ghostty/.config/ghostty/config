@@ -3,30 +3,31 @@ font-family = GeistMono Nerd Font
 window-padding-x = 15
 window-padding-y = 5
 
-background = #030303
-foreground = #fafafa
+background = #171717
+foreground = #f5f5f5
 
-cursor-color = #3d73eb
-cursor-text = #030303
+cursor-color = #51a2ff
+cursor-text = #171717
 
-selection-background = #3d73eb
-selection-foreground = #fafafa
+selection-background = #51a2ff
+selection-foreground = #f5f5f5
 
-split-divider-color = #404040
+split-divider-color = #737373
 
-palette = 0=#030303
-palette = 1=#e35659
-palette = 2=#24d064
-palette = 3=#f8cc5a
-palette = 4=#409cff
-palette = 5=#f278e8
-palette = 6=#00d0df
-palette = 7=#fafafa
-palette = 8=#404040
-palette = 9=#f62a2a
-palette = 10=#16a34a
-palette = 11=#eab308
-palette = 12=#3d73eb
-palette = 13=#f52c85
-palette = 14=#0891b2
-palette = 15=#f5f5f5
+palette = 0=#171717
+palette = 1=#ff6467
+palette = 2=#05df72
+palette = 3=#ffdf20
+palette = 4=#51a2ff
+palette = 5=#ed6aff
+palette = 6=#00b8db
+palette = 7=#f5f5f5
+
+palette = 8=#0a0a0a
+palette = 9=#e7000b
+palette = 10=#00a63e
+palette = 11=#f0b100
+palette = 12=#155dfc
+palette = 13=#e12afb
+palette = 14=#0092b8
+palette = 15=#fafafa
