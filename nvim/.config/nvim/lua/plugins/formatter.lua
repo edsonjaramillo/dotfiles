@@ -2,6 +2,6 @@
 ---@type LazySpec[]
 return {
 	{
-		dir = "~/code/nvim-plugins/abide",
+		dir = "~/code/nvim-plugins/abide.nvim",
 	},
 }

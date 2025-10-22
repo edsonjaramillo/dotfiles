@@ -27,6 +27,16 @@ check_dependencies() {
 	fi
 }
 
+normalize_basename() {
+	local arg_name=$1
+
+	local name
+	name=$(basename "$arg_name")
+
+	# replace all non-alphanumeric characters with underscores
+	echo "${name//[^a-zA-Z0-9]/_}"
+}
+
 # Get all available projects
 get_all_projects() {
 	local projects=()
@@ -83,7 +93,7 @@ create_or_attach_session() {
 # Open current workspace
 open_current_workspace() {
 	local session_name
-	session_name=$(basename "$PWD")
+	session_name=$(normalize_basename "$PWD")
 	create_or_attach_session "$session_name" "$PWD"
 }
 
@@ -124,7 +134,7 @@ create_new_session() {
 
 	if [ -n "$selected_path" ]; then
 		local session_name
-		session_name=$(basename "$selected_path")
+		session_name=$(normalize_basename "$selected_path")
 		create_or_attach_session "$session_name" "$selected_path"
 	else
 		echo "No project selected."
@@ -143,7 +153,7 @@ create_all_projects() {
 
 	while IFS= read -r project; do
 		local session_name
-		session_name=$(basename "$project")
+		session_name=$(normalize_basename "$project")
 		echo "Creating or attaching to session '$session_name' for project '$project'..."
 		create_or_attach_session "$session_name" "$project" false
 	done <<<"$projects"
@@ -156,7 +166,7 @@ main() {
 	check_dependencies
 
 	local current_dir
-	current_dir=$(basename "$PWD")
+	current_dir=$(normalize_basename "$PWD")
 
 	local choice
 	choice=$(
