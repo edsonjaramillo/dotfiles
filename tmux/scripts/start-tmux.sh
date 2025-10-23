@@ -96,6 +96,12 @@ create_or_attach_session() {
 	tmux new-window -d -t "$session_name" -n "shells" -c "$working_dir"
 	tmux split-window -h -t "$session_name:shells" -c "$working_dir"
 
+	# Setup lazygit window if .git exists
+	if [ -d "$working_dir/.git" ]; then
+		tmux new-window -d -t "$session_name" -n "git" -c "$working_dir"
+		tmux send-keys -t "$session_name:git" "lazygit" C-m
+	fi
+
 	if [ "$needs_attached" = true ]; then
 		tmux attach-session -t "$session_name"
 	fi
