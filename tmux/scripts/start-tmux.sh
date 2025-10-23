@@ -159,6 +159,8 @@ create_new_session() {
 	fi
 }
 
+#
+
 create_all_projects() {
 	local projects
 	projects=$(get_all_projects)
@@ -182,6 +184,14 @@ create_all_projects() {
 	echo "All sessions created."
 }
 
+detach_from_tmux() {
+	if [ -n "${TMUX:-}" ]; then
+		tmux detach-client
+	else
+		echo "Not currently in a tmux session."
+	fi
+}
+
 # Main menu
 main() {
 	check_dependencies
@@ -197,6 +207,8 @@ main() {
 			"Open existing session" \
 			"Create new session" \
 			"Create sessions for all projects" \
+			"Kill Tmux server" \
+			"Detach from Tmux" \
 			"Quit"
 	)
 
@@ -212,6 +224,12 @@ main() {
 		;;
 	"Create sessions for all projects")
 		create_all_projects
+		;;
+	"Kill Tmux server")
+		tmux kill-server
+		;;
+	"Detach from Tmux")
+		detach_from_tmux
 		;;
 	"Quit")
 		echo "Exiting..."
