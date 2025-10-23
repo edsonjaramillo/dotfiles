@@ -1,4 +1,5 @@
 local files_helper = require("helpers.files-helpers")
+local fzf = require("fzf-lua")
 local oil_helper = require("helpers.oil-helpers")
 local snacks_helper = require("helpers.snacks-helpers")
 
@@ -43,6 +44,14 @@ return {
 									hidden = files_helper.is_dotfiles,
 									matcher = { cwd_bonus = true },
 								})
+							end,
+						},
+						{
+							icon = "󰊢 ",
+							key = "s",
+							desc = "Git Status",
+							action = function()
+								require("fzf-lua").git_status()
 							end,
 						},
 						{
