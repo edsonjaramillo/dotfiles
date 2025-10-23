@@ -66,11 +66,22 @@ get_all_projects() {
 create_or_attach_session() {
 	local session_name="$1"
 	local working_dir="$2"
-	local needs_attachded="${3:-true}"
+	local needs_attached="${3:-true}"
+
+	# if already in a tmux session, just switch to it
+	if [ -n "${TMUX:-}" ]; then
+		tmux switch-client -t "$session_name" 2>/dev/null || {
+			echo "Not in tmux session '$session_name'. Detaching first..."
+			tmux detach-client
+		}
+	fi
 
 	if tmux has-session -t "$session_name" 2>/dev/null; then
-		echo "Session '$session_name' already exists. Attaching..."
-		tmux attach-session -t "$session_name"
+		if [ "$needs_attached" = true ]; then
+			echo "Session '$session_name' already exists. Attaching..."
+			tmux attach-session -t "$session_name"
+			return 0
+		fi
 		return 0
 	fi
 
@@ -85,7 +96,7 @@ create_or_attach_session() {
 	tmux new-window -d -t "$session_name" -n "shells" -c "$working_dir"
 	tmux split-window -h -t "$session_name:shells" -c "$working_dir"
 
-	if [ "$needs_attachded" = true ]; then
+	if [ "$needs_attached" = true ]; then
 		tmux attach-session -t "$session_name"
 	fi
 }
@@ -94,7 +105,7 @@ create_or_attach_session() {
 open_current_workspace() {
 	local session_name
 	session_name=$(normalize_basename "$PWD")
-	create_or_attach_session "$session_name" "$PWD"
+	create_or_attach_session "$session_name" "$PWD" true
 }
 
 # Select and attach to existing session
@@ -135,7 +146,7 @@ create_new_session() {
 	if [ -n "$selected_path" ]; then
 		local session_name
 		session_name=$(normalize_basename "$selected_path")
-		create_or_attach_session "$session_name" "$selected_path"
+		create_or_attach_session "$session_name" "$selected_path" true
 	else
 		echo "No project selected."
 		return 1
@@ -154,6 +165,10 @@ create_all_projects() {
 	while IFS= read -r project; do
 		local session_name
 		session_name=$(normalize_basename "$project")
+		if tmux has-session -t "$session_name" 2>/dev/null; then
+			echo "Session '$session_name' already exists. Skipping..."
+			continue
+		fi
 		echo "Creating or attaching to session '$session_name' for project '$project'..."
 		create_or_attach_session "$session_name" "$project" false
 	done <<<"$projects"
