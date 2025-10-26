@@ -1,7 +1,7 @@
 local prettier = require("abide").Abide:new("prettier")
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.js", "*.jsx", "*.mjs", "*.ts", "*.tsx", "*.json", "*.jsonc" },
+	pattern = { "*.js", "*.jsx", "*.mjs", "*.ts", "*.tsx", "*.json", "*.jsonc", "*.css" },
 	callback = function()
 		local filetype = prettier:get_filetype()
 
@@ -14,6 +14,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 			"typescript.tsx",
 			"json",
 			"jsonc",
+			"css",
 		}
 
 		if not prettier:check_filetypes(filetype, filetypes) then
@@ -27,7 +28,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 		local stdin = prettier:get_buffer_lines()
 
 		local argv = { "prettier" }
-		local prettier_config = prettier:find_config_file({ "prettier.config.mjs" })
+		local prettier_config =
+			prettier:find_config_file({ "prettier.config.mjs", "prettier.config.js" })
 		if prettier_config then
 			table.insert(argv, "--config")
 			table.insert(argv, prettier_config)
