@@ -96,6 +96,10 @@ return {
 				preset = "default",
 				["<CR>"] = { "accept", "fallback" },
 				["<C><leader>"] = { "show" },
+				["<Tab>"] = { "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "fallback" },
+				["<UP>"] = { "fallback" },
+				["<DOWN>"] = { "fallback" },
 			},
 			appearance = {
 				nerd_font_variant = "mono",
