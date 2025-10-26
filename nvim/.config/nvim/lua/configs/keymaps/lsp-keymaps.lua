@@ -32,6 +32,12 @@ wk.add({
 		desc = "Rename (LSP)",
 	},
 	{
+		"<leader>lc",
+		function()
+			require("fzf-lua").lsp_code_actions()
+		end,
+	},
+	{
 		"K",
 		vim.lsp.buf.hover({
 			focusable = false,
