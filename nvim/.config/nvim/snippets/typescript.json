@@ -1,0 +1,44 @@
+{
+	"react component with props": {
+		"prefix": "_rfcepropstype",
+		"body": [
+			"type ${1}Props = {};",
+			"",
+			"export function ${1}({}: ${1}Props) {",
+			"  return <div>${2}</div>;",
+			"}"
+		],
+		"description": "react component with props (type)"
+	},
+	"react component with props (interface)": {
+		"prefix": "_rfcepropsinterface",
+		"body": [
+			"interface ${1}Props {}",
+			"",
+			"export function ${1}({}: ${1}Props) {",
+			"  return <div>${2}</div>;",
+			"}"
+		],
+		"description": "react component with props (interface)"
+	},
+	"react component": {
+		"prefix": "_rfce",
+		"body": ["export function ${1}() {", "  return <div>${2}</div>;", "}"],
+		"description": "react component with props"
+	},
+	"React useEffectHook Async": {
+		"prefix": "useeffecthookasync",
+		"body": ["useEffect(() => {(async () => {$1})();", "}, []);"],
+		"description": "React useEffectHook Async"
+	},
+	"pre JSON stringify": {
+		"prefix": "prejson",
+		"body": ["<pre>{JSON.stringify(${1:Array}, null, 2)}</pre>"],
+		"description": "pre tag with json"
+	},
+	"a tag external props": {
+		"prefix": "externalatag",
+		"body": ["rel='noopener nofollow noreferrer external'", "target='_blank'"],
+		"description": "a tag external props"
+	}
+}

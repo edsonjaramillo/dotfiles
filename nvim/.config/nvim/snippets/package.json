@@ -9,6 +9,10 @@
 			{
 				"language": "toml",
 				"path": "./toml.json"
+			},
+			{
+				"language": "typescriptreact",
+				"path": "./typescript.json"
 			}
 		]
 	}
