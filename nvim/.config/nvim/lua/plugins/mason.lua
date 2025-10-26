@@ -27,6 +27,7 @@ return {
 					-- node
 					"ts_ls",
 					"eslint",
+					"emmet_ls",
 					"prettier",
 					-- python
 					-- "pyright",
