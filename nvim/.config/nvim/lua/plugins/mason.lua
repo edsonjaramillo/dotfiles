@@ -29,6 +29,9 @@ return {
 					"eslint",
 					"emmet_ls",
 					"prettier",
+					-- css
+					"tailwindcss",
+					"cssls",
 					-- python
 					-- "pyright",
 					-- "ruff",
