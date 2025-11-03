@@ -77,21 +77,7 @@ wk.add({
 	{
 		"<leader>ac",
 		function()
-			local notifyTitle = "Copilot Commit Message"
-			local record = notify("Generating commit message...", "info", {
-				title = notifyTitle,
-				timeout = false,
-			})
-			local copilot = require("CopilotChat")
-			copilot.ask(commit_prompt, {
-				model = "gpt-5-mini",
-				sticky = { "#git:staged", "#gitdiff:staged" },
-				callback = function()
-					require("local-plugins.ai-yank").yank_commit_message(record.id, notifyTitle)
-				end,
-			})
-			copilot.reset()
-			copilot.close()
+			require("local-plugins.ai-yank").commit(commit_prompt)
 		end,
 		desc = "Git Commit Message",
 	},

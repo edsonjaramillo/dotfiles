@@ -3,7 +3,7 @@ local M = {}
 
 ---Get bufnr from Copilot Chat if it exists
 ---@return number|nil
-local function get_copilot_chat_bufnr()
+local function get_gitcommit_bufnr()
 	local buf_list = vim.api.nvim_list_bufs()
 
 	for _, bufnr in ipairs(buf_list) do
@@ -11,7 +11,7 @@ local function get_copilot_chat_bufnr()
 			local buf_name = vim.api.nvim_buf_get_name(bufnr)
 			local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
 
-			if filetype == "copilot-chat" or buf_name:match("Copilot Chat") then
+			if filetype == "gitcommit" then
 				return bufnr
 			end
 		end
@@ -20,56 +20,40 @@ local function get_copilot_chat_bufnr()
 	return nil
 end
 
---- Yank commit message from Copilot Chat buffer to system clipboard
---- @param record_id number
---- @param notify_title string
-M.yank_commit_message = function(record_id, notify_title)
-	local copilot_chat_bufnr = get_copilot_chat_bufnr()
-	if not copilot_chat_bufnr then
-		notify.notify("No Copilot Chat buffer found", "ERROR", {
-			replace = record_id,
-			title = notify_title,
-			timeout = 1000,
-		})
-		return nil
-	end
-
-	local lines = vim.api.nvim_buf_get_lines(copilot_chat_bufnr, 0, -1, false)
-
-	local recording = false
-	local commit_message_lines = {}
-
-	for _, line in ipairs(lines) do
-		-- start recording after a Copilot header
-		if line:match("^#%s+Copilot") then
-			recording = true
-			goto continue
-		end
-
-		-- stop when next User header appears
-		if recording and line:match("^#%s+User %(.+%) ───") then
-			break
-		end
-
-		if recording then
-			if line ~= "" then
-				table.insert(commit_message_lines, line)
-			end
-		end
-
-		::continue::
-	end
-
-	local formatted_message = table.concat(commit_message_lines, "\n")
-
-	vim.fn.setreg("+", formatted_message)
-	notify.notify("Commit message yanked to system clipboard", "INFO", {
-		replace = record_id,
-		title = notify_title,
-		timeout = 1000,
+---@param commit_prompt string
+M.commit = function(commit_prompt)
+	local notifyTitle = "Copilot Commit Message"
+	local record = notify("Generating commit message...", "info", {
+		title = notifyTitle,
+		timeout = false,
 	})
 
-	return formatted_message
+	local copilot = require("CopilotChat")
+	copilot.ask(commit_prompt, {
+		model = "gpt-5-mini",
+		sticky = { "#git:staged", "#gitdiff:staged" },
+		callback = function(response)
+			local commit_bufnr = get_gitcommit_bufnr()
+			if not commit_bufnr then
+				notify("Could not find gitcommit buffer.", "error", {
+					replace = record,
+					title = notifyTitle,
+					timeout = 3000,
+				})
+				return
+			end
+
+			local commit_msg = vim.split(response.content, "\n")
+			vim.api.nvim_buf_set_lines(commit_bufnr, 0, -1, false, commit_msg)
+			notify("Commit message generated.", "info", {
+				replace = record,
+				title = notifyTitle,
+				timeout = 3000,
+			})
+		end,
+	})
+	copilot.reset()
+	copilot.close()
 end
 
 return M
