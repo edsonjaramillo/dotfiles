@@ -19,14 +19,33 @@ wk.add({
 		"<cmd>%bd|e#|bd#<cr>",
 		desc = "Close all buffers except current",
 	},
+})
+
+wk.add({
+	mode = { "n" },
 	{
-		"<leader>b]",
-		"<cmd>bnext<cr>",
-		desc = "Go to next buffer",
+		"<leader>tn",
+		"<cmd>tabnew<cr>",
+		desc = "Open new tab",
 	},
 	{
-		"<leader>b[",
-		"<cmd>bprevious<cr>",
-		desc = "Go to previous buffer",
+		"<leader>tq",
+		"<cmd>tabclose<cr>",
+		desc = "Close current tab",
+	},
+	{
+		"[t",
+		"<cmd>tabprevious<cr>",
+		desc = "Go to previous tab",
+	},
+	{
+		"]t",
+		"<cmd>tabnext<cr>",
+		desc = "Go to next tab",
+	},
+	{
+		"<leader>to",
+		"<cmd>tabonly<cr>",
+		desc = "Close all other tabs",
 	},
 })
