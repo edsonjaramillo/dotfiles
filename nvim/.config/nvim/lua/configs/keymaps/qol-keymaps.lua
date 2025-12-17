@@ -11,9 +11,20 @@ for _, key in ipairs(esc_keys) do
 end
 
 wk.add({
-	"<leader>i",
-	":source $MYVIMRC<CR>:luafile %<CR>",
-	desc = "Source $MYVIMRC and Luafile Current File",
+	mode = "n",
+	{
+		"<leader>i",
+		":source $MYVIMRC<CR>:luafile %<CR>",
+		desc = "Source $MYVIMRC and Luafile Current File",
+	},
+	{
+		"<leader>R",
+		function()
+			vim.cmd("Lazy reload earthshine.nvim")
+			vim.cmd("colorscheme earthshine")
+		end,
+		desc = "Reload Lazy earthshine plugin and colorscheme earthshine",
+	},
 })
 
 -- print commands
