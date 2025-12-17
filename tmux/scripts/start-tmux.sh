@@ -192,6 +192,27 @@ detach_from_tmux() {
 	fi
 }
 
+create_auxiliary_session() {
+	local projects
+	projects=$(get_all_projects)
+
+	if [ -z "$projects" ]; then
+		echo "No projects found." >&2
+		return 1
+	fi
+
+	local selected_path
+	selected_path=$(echo "$projects" | gum choose --header "Select project to create sessions for:")
+	if [ -z "$selected_path" ]; then
+		echo "No projects selected."
+		return 1
+	fi
+
+	local session_name
+	session_name=$(normalize_basename "$selected_path")"_aux"
+	create_or_attach_session "$session_name" "$selected_path" true
+}
+
 # Main menu
 main() {
 	check_dependencies
@@ -207,6 +228,7 @@ main() {
 			"Open existing session" \
 			"Create new session" \
 			"Create sessions for all projects" \
+			"Create auxiliary session" \
 			"Kill Tmux server" \
 			"Detach from Tmux" \
 			"Quit"
@@ -224,6 +246,9 @@ main() {
 		;;
 	"Create sessions for all projects")
 		create_all_projects
+		;;
+	"Create auxiliary session")
+		create_auxiliary_session
 		;;
 	"Kill Tmux server")
 		tmux kill-server
