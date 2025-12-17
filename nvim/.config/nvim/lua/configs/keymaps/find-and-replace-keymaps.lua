@@ -10,16 +10,22 @@ wk.add({
 	{
 		"<leader>ro",
 		function()
-			require("spectre").open()
+			local flags = {}
+
+			local is_dotfiles = files_helper.is_dotfiles()
+			if is_dotfiles then
+				table.insert(flags, "--hidden")
+			end
+
+			local concat_flags = table.concat(flags, " ")
+
+			require("grug-far").open({
+				prefills = {
+					flags = concat_flags,
+				},
+			})
 		end,
 		desc = "Open Spectre",
-	},
-	{
-		"<leader>rc",
-		function()
-			require("spectre").close()
-		end,
-		desc = "Close Spectre",
 	},
 	{
 		"<leader>rw",
