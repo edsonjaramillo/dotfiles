@@ -92,9 +92,14 @@ create_or_attach_session() {
 	tmux rename-window -t "$session_name:1" "editor"
 	tmux send-keys -t "$session_name:editor" "nvim" C-m
 
-	# Setup shells window with horizontal split
+	# Setup shells window with 2x2 window layout
 	tmux new-window -d -t "$session_name" -n "shells" -c "$working_dir"
 	tmux split-window -h -t "$session_name:shells" -c "$working_dir"
+	tmux select-pane -t "$session_name:shells".1
+	tmux split-window -v -t "$session_name:shells" -c "$working_dir"
+	tmux select-pane -t "$session_name:shells".3
+	tmux split-window -v -t "$session_name:shells" -c "$working_dir"
+	tmux select-pane -t "$session_name:shells".1
 
 	# Setup lazygit window if .git exists
 	if [ -d "$working_dir/.git" ]; then

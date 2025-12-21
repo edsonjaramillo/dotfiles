@@ -34,3 +34,6 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+
+# add nix profile to PATH
+export PATH="$HOME/.nix-profile/bin:$PATH"
