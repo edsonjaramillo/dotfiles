@@ -1,3 +1,10 @@
+vim.lsp.enable({
+	"bashls",
+	"copilot",
+	"lua_ls",
+	"nil_ls",
+})
+
 vim.diagnostic.config({
 	virtual_text = true,
 	underline = false,

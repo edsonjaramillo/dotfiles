@@ -2,10 +2,10 @@ local shfmt = require("abide").Abide:new("shfmt")
 
 -- Auto-format sh/bash files with shfmt on save
 vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.sh", "*.bash" },
+	pattern = { "*.sh", "*.bash", "*.zsh", ".zshrc" },
 	callback = function()
 		local filetype = shfmt:get_filetype()
-		if not shfmt:check_filetypes(filetype, { "sh", "bash" }) then
+		if not shfmt:check_filetypes(filetype, { "sh", "bash", "zsh" }) then
 			return
 		end
 

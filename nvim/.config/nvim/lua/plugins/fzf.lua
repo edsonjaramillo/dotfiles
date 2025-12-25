@@ -3,9 +3,6 @@
 return {
 	{
 		"ibhagwan/fzf-lua",
-		dependencies = {
-			"nvim-nvim/nvim-lspconfig",
-		},
 		opts = {},
 	},
 }

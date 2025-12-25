@@ -3,6 +3,7 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "master",
 		build = ":TSUpdate",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
@@ -32,6 +33,7 @@ return {
 			ensure_installed = {
 				"vim",
 				"vimdoc",
+				"nix",
 				"lua",
 				-- shell
 				"bash",
@@ -60,6 +62,7 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "master",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		opts = {},
 		config = function(_, opts)
