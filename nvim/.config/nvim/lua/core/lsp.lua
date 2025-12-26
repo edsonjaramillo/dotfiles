@@ -1,8 +1,10 @@
 vim.lsp.enable({
 	"bashls",
 	"copilot",
+	"eslint",
 	"lua_ls",
 	"nil_ls",
+	"tsgo",
 })
 
 vim.diagnostic.config({
