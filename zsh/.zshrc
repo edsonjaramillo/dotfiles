@@ -3,15 +3,20 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # {# Starship (prompt)
 if [[ -x "$(command -v starship)" ]]; then
-  eval "$(starship init zsh)"
+	eval "$(starship init zsh)"
+fi
+
+if [[ -x "$(command -v atuin)" ]]; then
+	eval "$(atuin init zsh)"
 fi
 
 # Source zsh files
 [[ -f "$HOME/.zsh/plugins/core.zsh" ]] && source "$HOME/.zsh/plugins/core.zsh"
-[[ -f "$HOME/.zsh/plugins/history.zsh" ]] && source "$HOME/.zsh/plugins/history.zsh"
+[[ -f "$HOME/scripts/history.sh" ]] && source "$HOME/scripts/history.sh"
 [[ -f "$HOME/.zsh/plugins/eza.zsh" ]] && source "$HOME/.zsh/plugins/eza.zsh"
+[[ -f "$HOME/scripts/nix.sh" ]] && source "$HOME/scripts/nix.sh"
 
-# Source aliases 
+# Source aliases
 [[ -f "$HOME/.zsh/aliases/system.sh" ]] && source "$HOME/.zsh/aliases/system.sh"
 
 # FNN (Fast Node Manager)
@@ -31,8 +36,8 @@ eval "$(zoxide init zsh)"
 # pnpm
 export PNPM_HOME="/Users/edsonjaramillo/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
 # add nix profile to PATH
