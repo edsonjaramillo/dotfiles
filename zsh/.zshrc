@@ -42,3 +42,6 @@ esac
 
 # add nix profile to PATH
 export PATH="$HOME/.nix-profile/bin:$PATH"
+
+# add extractedfs language servers to PATH
+export PATH="$HOME/.nix-profile/lib/node_modules/vscode-langservers-extracted/bin:$PATH"
