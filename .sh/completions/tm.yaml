@@ -1,0 +1,16 @@
+tm:
+  - start:
+      - --switch:
+          - $(tmux list-sessions -f '#s' 2>/dev/null)
+      - --aux
+  - detach:
+      - --help
+  - editor:
+      - --help
+  - quads:
+      - --help
+  - git:
+      - --help
+  - kill:
+      - $(tmux list-sessions -f '#s' 2>/dev/null)
+      - --all
