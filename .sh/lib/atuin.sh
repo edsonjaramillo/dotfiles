@@ -11,6 +11,9 @@ hh() {
 	derrors)
 		_hh_derrors
 		;;
+	sync)
+		_hh_sync
+		;;
 	help | --help | -h | "")
 		_hh_help
 		;;
@@ -28,12 +31,14 @@ Usage: hh <command> [arguments]
 
 Commands:
   derrors              Delete all commands that failed (non-zero exit)
-  dinteractive         Interactively delete history with fzf (multi-select)
+  dsearch              Interactively delete history with fzf (multi-select)
+  sync                 Sync shell history from atuin to HISTFILE
   help                 Show this help message
 
 Examples:
   hh derrors
   hh dsearch
+  hh sync
 EOF
 }
 
@@ -78,4 +83,8 @@ _hh_dsearch() {
 	done <<<"$selected"
 
 	echo "Deleted $count entries"
+}
+
+_hh_sync() {
+	atuin history list --format "{command}" | sort -u >"${HISTFILE}"
 }
