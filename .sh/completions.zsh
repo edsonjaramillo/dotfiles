@@ -14,3 +14,7 @@ fi
 if has_command task; then
 	eval "$(task --completion zsh)"
 fi
+
+if has_command atuin; then
+	source <(atuin gen-completions --shell zsh)
+fi
