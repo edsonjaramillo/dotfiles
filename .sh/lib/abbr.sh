@@ -32,9 +32,9 @@ iabbr() {
 	abbr add grs='git restore --staged' --quiet
 
 	############### files ###############
-	abbr add fdf='fd -H -I -t f' --quiet
-	abbr add fdd='fd -H -I -t d' --quiet
-	abbr add fde='fd -H -I -t f -e' --quiet
+	abbr add fdf='fd -H -I -t f -E .git' --quiet
+	abbr add fdd='fd -H -I -t d -E .git' --quiet
+	abbr add fde='fd -H -I -t f -E .git -e' --quiet
 
 	############### tm ###############
 	abbr add tms='tm start' --quiet
@@ -43,6 +43,7 @@ iabbr() {
 	abbr add tmk='tm kill' --quiet
 	abbr add tmka='tm kill --all' --quiet
 	abbr add tme='tm editor' --quiet
+	abbr add tmo='tm opencode' --quiet
 	abbr add tmg='tm git' --quiet
 	abbr add tmq='tm quads' --quiet
 

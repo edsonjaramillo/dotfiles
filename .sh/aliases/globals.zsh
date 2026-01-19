@@ -17,7 +17,7 @@ alias -g TBL="| column -t"
 alias -g FZ="| fzf --reverse"
 alias -g FZM="| fzf --multi --reverse"
 
-alias -g FF='$(fd -H -I -t f | fzf --reverse)'
-alias -g FD='$(fd -H -I -t d | fzf --reverse)'
+alias -g FF='$(fd -H -I -E .git -t f | fzf --reverse)'
+alias -g FD='$(fd -H -I -E .git -t d | fzf --reverse)'
 
 alias -g XA="| xargs"
