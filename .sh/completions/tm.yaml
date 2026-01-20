@@ -1,18 +1,16 @@
 tm:
   - start:
-      - --switch:
-          - $(tmux list-sessions -F \#S)
       - --aux
   - detach:
       - --help
   - editor:
-      - --help
+      - --new
   - opencode:
-      - --help
+      - --new
   - quads:
-      - --help
+      - --new
   - git:
-      - --help
+      - --new
   - kill:
       - $(tmux list-sessions -F \#S)
       - --all
