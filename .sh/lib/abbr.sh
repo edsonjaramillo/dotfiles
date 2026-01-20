@@ -48,6 +48,7 @@ iabbr() {
 	abbr add tmq='tm quads' --quiet
 
 	################ history ###############
-	abbr add hhs="hh dsearch" --quiet
-	abbr add hhe="hh derrors" --quiet
+	abbr add hde='hst delete errors' --quiet
+	abbr add hds='hst delete search' --quiet
+	abbr add hs='hst sync' --quiet
 }

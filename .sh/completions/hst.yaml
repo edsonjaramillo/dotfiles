@@ -1,0 +1,10 @@
+hst:
+  - delete:
+      - search:
+          - -h
+          - --help
+      - errors:
+          - -h
+          - --help
+  - sync:
+      - --help
