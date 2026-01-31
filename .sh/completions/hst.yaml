@@ -1,9 +1,12 @@
 hst:
-  - delete:
+  - remove:
       - search:
           - -h
           - --help
       - errors:
+          - -h
+          - --help
+      - fewer:
           - -h
           - --help
   - sync:
