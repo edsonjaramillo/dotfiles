@@ -30,6 +30,9 @@ iabbr() {
 	abbr add gf='git fetch' --quiet
 	# restore
 	abbr add grs='git restore --staged' --quiet
+	# reset
+	abbr add grsh='git reset --soft HEAD~' --quiet
+	abbr add grhh='git reset --hard HEAD~' --quiet
 
 	############### files ###############
 	abbr add fdf='fd -H -I -t f -E .git' --quiet
