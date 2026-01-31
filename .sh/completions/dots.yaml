@@ -1,0 +1,6 @@
+dots:
+  - unlink:
+      - --help
+  - link:
+      - --all
+      - --help
