@@ -3,21 +3,51 @@
 ## with ^ or end with $, they'll match anywhere in the command.
 ## For details on the supported regular expression syntax, see
 ## https://docs.rs/regex/latest/regex/#syntax
+# .             any character except new line (includes new line with s flag)
+# [0-9]         any ASCII digit
+# \d            digit (\p{Nd})
+# \D            not digit
+# \pX           Unicode character class identified by a one-letter name
+# \p{Greek}     Unicode character class (general category or script)
+# \PX           Negated Unicode character class identified by a one-letter name
+# \P{Greek}     negated Unicode character class (general category or script)
+# [xyz]         A character class matching either x, y or z (union).
+# [^xyz]        A character class matching any character except x, y and z.
+# [a-z]         A character class matching any character in range a-z.
+# [[:alpha:]]   ASCII character class ([A-Za-z])
+# [[:^alpha:]]  Negated ASCII character class ([^A-Za-z])
+# [x[^xyz]]     Nested/grouping character class (matching any character except y and z)
+# [a-y&&xyz]    Intersection (matching x or y)
+# [0-9&&[^4]]   Subtraction using intersection and negation (matching 0-9 except 4)
+# [0-9--4]      Direct subtraction (matching 0-9 except 4)
+# [a-g~~b-h]    Symmetric difference (matching `a` and `h` only)
+# [\[\]]        Escaping in character classes (matching [ or ])
+# [a&&b]        An empty character class matching nothing
+
 history_filter = [
-  "--help",
-  "--version",
-  "-h",
-  "-v",
+  "(?:^|\\s)(?:--(?:help|version)|-[hv])(?:\\s|$)",
+  ";$",
+  "^bat",
+  "^bond",
   "^cat ",
   "^cd ",
   "^clear",
+  "^codex ",
   "^cp ",
+  "^dots",
+  "^git (?:add|switch)\\b",
+  "^hst",
   "^ls ",
+  "^mkdir",
   "^mv ",
   "^nvim ",
-  "^rm",
+  "^pnpm (?:install|uninstall)\\b",
+  "^rm(?:\\s|$)",
   "^task",
+  "^tm",
   "^tmux",
+  "^touch",
+  "^tree ",
   "^where ",
   "^which ",
   "^z ",
