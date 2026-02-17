@@ -39,6 +39,10 @@ iabbr() {
 	abbr add fdd='fd -H -I -t d -E .git' --quiet
 	abbr add fde='fd -H -I -t f -E .git -e' --quiet
 
+	############### lazy ###############
+	abbr add lg='lazygit' --quiet
+	abbr add lf='lazydocker' --quiet
+
 	############### tm ###############
 	abbr add tms='tm start' --quiet
 	abbr add tmsw='tm start --switch' --quiet
