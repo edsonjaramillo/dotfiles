@@ -1,3 +1,9 @@
+# FNN (Fast Node Manager)
+if has_command fnm; then
+	eval "$(fnm env --use-on-cd --shell zsh)"
+	source <(fnm completions --shell zsh)
+fi
+
 if has_command uv; then
 	eval "$(uv generate-shell-completion zsh)"
 	eval "$(uvx --generate-shell-completion zsh)"
@@ -39,12 +45,6 @@ fi
 
 if has_command atuin; then
 	eval "$(atuin init zsh)"
-fi
-
-# FNN (Fast Node Manager)
-if has_command fnm; then
-	eval "$(fnm env --use-on-cd --shell zsh)"
-	source <(fnm completions --shell zsh)
 fi
 
 # zoxide
