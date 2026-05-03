@@ -41,7 +41,7 @@ iabbr() {
 
 	############### lazy ###############
 	abbr add lg='lazygit' --quiet
-	abbr add lf='lazydocker' --quiet
+	abbr add ld='lazydocker' --quiet
 
 	############### tm ###############
 	abbr add tms='tm start' --quiet
@@ -59,4 +59,13 @@ iabbr() {
 	abbr add hrs='hst remove search' --quiet
 	abbr add hrf='hst remove fewer' --quiet
 	abbr add hs='hst sync' --quiet
+
+	############### ordo ###############
+	abbr add oi='ordo install' --quiet
+	abbr add ou='ordo uninstall' --quiet
+	abbr add oup='ordo update' --quiet
+	abbr add or='ordo run' --quiet
+	abbr add ogi='ordo global install' --quiet
+	abbr add ogu='ordo global uninstall' --quiet
+	abbr add ogup='ordo global update' --quiet
 }
