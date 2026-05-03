@@ -63,3 +63,19 @@ fi
 if has_command hst; then
 	source <(hst completion zsh)
 fi
+
+if has_command sr; then
+	source <(sr completion zsh)
+fi
+
+if has_command ordo; then
+	source <(ordo completion zsh)
+fi
+
+if has_command pnpm; then
+	eval "$(pnpm completion zsh)"
+fi
+
+if has_command bun; then
+	source <(vidmini completion zsh)
+fi
