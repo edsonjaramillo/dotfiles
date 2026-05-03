@@ -1,12 +1,760 @@
+#:schema https://raw.githubusercontent.com/yazi-rs/schemas/refs/heads/main/schemas/keymap.json
+
+# =========================
+# Manager layer ([mgr])
+# =========================
+
+# Move cursor down (vim j)
+[[mgr.prepend_keymap]]
+on = "j"
+run = "arrow 1"
+desc = "Move cursor down"
+
+# Move cursor up (vim k)
+[[mgr.prepend_keymap]]
+on = "k"
+run = "arrow -1"
+desc = "Move cursor up"
+
+# Jump to top (vim gg)
+[[mgr.prepend_keymap]]
+on = ["g", "g"]
+run = "arrow top"
+desc = "Go to top"
+
+# Jump to bottom (vim G)
+[[mgr.prepend_keymap]]
+on = "G"
+run = "arrow bot"
+desc = "Go to bottom"
+
+# Page down half screen (vim Ctrl-d)
+[[mgr.prepend_keymap]]
+on = "<C-d>"
+run = "arrow 50%"
+desc = "Move down half a page"
+
+# Page up half screen (vim Ctrl-u)
+[[mgr.prepend_keymap]]
+on = "<C-u>"
+run = "arrow -50%"
+desc = "Move up half a page"
+
+# Go to parent directory (vim h)
+[[mgr.prepend_keymap]]
+on = "h"
+run = "leave"
+desc = "Go to parent directory"
+
+# Enter directory (vim l)
+[[mgr.prepend_keymap]]
+on = "l"
+run = "enter"
+desc = "Enter directory"
+
+# History back (vim H style)
+[[mgr.prepend_keymap]]
+on = "H"
+run = "back"
+desc = "Go back in history"
+
+# History forward (vim L style)
+[[mgr.prepend_keymap]]
+on = "L"
+run = "forward"
+desc = "Go forward in history"
+
+# Enter visual selection mode (vim v)
+[[mgr.prepend_keymap]]
+on = "v"
+run = "visual_mode"
+desc = "Enter visual mode"
+
+# Exit visual selection mode
+[[mgr.prepend_keymap]]
+on = "V"
+run = "visual_mode --unset"
+desc = "Exit visual mode"
+
+# Toggle selection of hovered file
+[[mgr.prepend_keymap]]
+on = "<Space>"
+run = "toggle"
+desc = "Toggle selection"
+
+# Open hovered or selected files
+[[mgr.prepend_keymap]]
+on = "<Enter>"
+run = '''shell --block -- if [ -n "%h" ] && [ -d "%h" ]; then cd -- "%h" && nvim; elif [ -n "%h" ]; then nvim -- "%h"; else nvim; fi'''
+desc = "Open directory/file in Neovim"
+
+# Open with picker (interactive)
+[[mgr.prepend_keymap]]
+on = "o"
+run = '''shell --block -- if [ -n "%h" ] && [ -d "%h" ]; then cd -- "%h" && nvim; else ya emit open --interactive --hovered; fi'''
+desc = "Open directory in Neovim or file with picker"
+
+# Show file metadata spotter (vim K convention)
+[[mgr.prepend_keymap]]
+on = "K"
+run = "spot"
+desc = "Show file information"
+
+# Yank files (vim yy)
+[[mgr.prepend_keymap]]
+on = ["y", "y"]
+run = "yank"
+desc = "Yank selected files"
+
+# Trash files safely with confirmation (vim dd)
+[[mgr.prepend_keymap]]
+on = ["d", "d"]
+run = "remove"
+desc = "Trash selected files"
+
+# Permanently delete files with confirmation
+[[mgr.prepend_keymap]]
+on = ["d", "D"]
+run = "remove --permanently"
+desc = "Permanently delete selected files"
+
+# Paste yanked files (vim p)
+[[mgr.prepend_keymap]]
+on = "p"
+run = "paste"
+desc = "Paste yanked files"
+
+# Paste and overwrite destination if needed (vim P variant)
+[[mgr.prepend_keymap]]
+on = "P"
+run = "paste --force"
+desc = "Paste and overwrite existing files"
+
+# Create file or directory (vim a for add)
+[[mgr.prepend_keymap]]
+on = "a"
+run = "create"
+desc = "Create file or directory"
+
+# Rename hovered file
+[[mgr.prepend_keymap]]
+on = "r"
+run = "rename"
+desc = "Rename file"
+
+# Start find in current list (vim /)
+[[mgr.prepend_keymap]]
+on = "/"
+run = "find --smart"
+desc = "Find next match"
+
+# Jump to next find result (vim n)
+[[mgr.prepend_keymap]]
+on = "n"
+run = "find_arrow"
+desc = "Go to next find result"
+
+# Jump to previous find result (vim N)
+[[mgr.prepend_keymap]]
+on = "N"
+run = "find_arrow --previous"
+desc = "Go to previous find result"
+
+# Jump to directory using zoxide + fzf
+[[mgr.prepend_keymap]]
+on = "z"
+run = '''shell --block -- dir="$(zoxide query -l | fzf --height=40% --layout=reverse --border --prompt='zoxide> ')"; [ -n "$dir" ] && ya emit cd -- "$dir"'''
+desc = "Jump to directory from zoxide"
+
+# Open key help
+[[mgr.prepend_keymap]]
+on = "?"
+run = "help"
+desc = "Open help"
+
+# Close current tab, or quit if last tab
+[[mgr.prepend_keymap]]
+on = "q"
+run = "close"
+desc = "Close tab"
+
+# Quit Yazi
+[[mgr.prepend_keymap]]
+on = "Q"
+run = "quit"
+desc = "Quit Yazi"
+
+# Jump to code directory (existing custom shortcut)
 [[mgr.prepend_keymap]]
 on = ["g", "c"]
 run = "cd ~/code/"
 desc = "Go to code directory"
 
+# Jump to dotfiles directory (existing custom shortcut)
 [[mgr.prepend_keymap]]
 on = ["g", "d"]
 run = "cd ~/dotfiles/"
 desc = "Go to dotfiles directory"
 
-[mgr]
-show_hidden = "show"
+# Jump to .config directory (existing custom shortcut)
+[[mgr.prepend_keymap]]
+on = ["g", "C"]
+run = "cd ~/.config/"
+desc = "Go to .config directory"
+
+
+# =========================
+# Tasks layer ([tasks])
+# =========================
+
+# Move cursor down (vim j)
+[[tasks.prepend_keymap]]
+on = "j"
+run = "arrow 1"
+desc = "Move cursor down"
+
+# Move cursor up (vim k)
+[[tasks.prepend_keymap]]
+on = "k"
+run = "arrow -1"
+desc = "Move cursor up"
+
+# Jump to top (vim gg)
+[[tasks.prepend_keymap]]
+on = ["g", "g"]
+run = "arrow top"
+desc = "Go to top"
+
+# Jump to bottom (vim G)
+[[tasks.prepend_keymap]]
+on = "G"
+run = "arrow bot"
+desc = "Go to bottom"
+
+# Page down half screen (vim Ctrl-d)
+[[tasks.prepend_keymap]]
+on = "<C-d>"
+run = "arrow 50%"
+desc = "Move down half a page"
+
+# Page up half screen (vim Ctrl-u)
+[[tasks.prepend_keymap]]
+on = "<C-u>"
+run = "arrow -50%"
+desc = "Move up half a page"
+
+# Inspect selected task log
+[[tasks.prepend_keymap]]
+on = "<Enter>"
+run = "inspect"
+desc = "Inspect task"
+
+# Inspect selected task log (vim l)
+[[tasks.prepend_keymap]]
+on = "l"
+run = "inspect"
+desc = "Inspect task"
+
+# Cancel selected task
+[[tasks.prepend_keymap]]
+on = "x"
+run = "cancel"
+desc = "Cancel task"
+
+# Close task manager
+[[tasks.prepend_keymap]]
+on = "q"
+run = "close"
+desc = "Close tasks"
+
+# Close task manager (escape)
+[[tasks.prepend_keymap]]
+on = "<Esc>"
+run = "close"
+desc = "Close tasks"
+
+# Open key help
+[[tasks.prepend_keymap]]
+on = "?"
+run = "help"
+desc = "Open help"
+
+
+# =========================
+# Spot layer ([spot])
+# =========================
+
+# Move cursor down (vim j)
+[[spot.prepend_keymap]]
+on = "j"
+run = "arrow 1"
+desc = "Move cursor down"
+
+# Move cursor up (vim k)
+[[spot.prepend_keymap]]
+on = "k"
+run = "arrow -1"
+desc = "Move cursor up"
+
+# Jump to top (vim gg)
+[[spot.prepend_keymap]]
+on = ["g", "g"]
+run = "arrow top"
+desc = "Go to top"
+
+# Jump to bottom (vim G)
+[[spot.prepend_keymap]]
+on = "G"
+run = "arrow bot"
+desc = "Go to bottom"
+
+# Page down half screen (vim Ctrl-d)
+[[spot.prepend_keymap]]
+on = "<C-d>"
+run = "arrow 50%"
+desc = "Move down half a page"
+
+# Page up half screen (vim Ctrl-u)
+[[spot.prepend_keymap]]
+on = "<C-u>"
+run = "arrow -50%"
+desc = "Move up half a page"
+
+# Swipe to next file from spotter
+[[spot.prepend_keymap]]
+on = "J"
+run = "swipe 1"
+desc = "Swipe to next file"
+
+# Swipe to previous file from spotter
+[[spot.prepend_keymap]]
+on = "K"
+run = "swipe -1"
+desc = "Swipe to previous file"
+
+# Copy selected cell
+[[spot.prepend_keymap]]
+on = "y"
+run = "copy cell"
+desc = "Copy selected cell"
+
+# Close spotter (vim h)
+[[spot.prepend_keymap]]
+on = "h"
+run = "close"
+desc = "Close spotter"
+
+# Close spotter
+[[spot.prepend_keymap]]
+on = "q"
+run = "close"
+desc = "Close spotter"
+
+# Close spotter (escape)
+[[spot.prepend_keymap]]
+on = "<Esc>"
+run = "close"
+desc = "Close spotter"
+
+# Open key help
+[[spot.prepend_keymap]]
+on = "?"
+run = "help"
+desc = "Open help"
+
+
+# =========================
+# Pick layer ([pick])
+# =========================
+
+# Move cursor down (vim j)
+[[pick.prepend_keymap]]
+on = "j"
+run = "arrow 1"
+desc = "Move cursor down"
+
+# Move cursor up (vim k)
+[[pick.prepend_keymap]]
+on = "k"
+run = "arrow -1"
+desc = "Move cursor up"
+
+# Jump to top (vim gg)
+[[pick.prepend_keymap]]
+on = ["g", "g"]
+run = "arrow top"
+desc = "Go to top"
+
+# Jump to bottom (vim G)
+[[pick.prepend_keymap]]
+on = "G"
+run = "arrow bot"
+desc = "Go to bottom"
+
+# Submit selected item
+[[pick.prepend_keymap]]
+on = "<Enter>"
+run = "close --submit"
+desc = "Submit selection"
+
+# Submit selected item (vim l)
+[[pick.prepend_keymap]]
+on = "l"
+run = "close --submit"
+desc = "Submit selection"
+
+# Cancel picker (vim h)
+[[pick.prepend_keymap]]
+on = "h"
+run = "close"
+desc = "Cancel picker"
+
+# Cancel picker
+[[pick.prepend_keymap]]
+on = "q"
+run = "close"
+desc = "Cancel picker"
+
+# Cancel picker (escape)
+[[pick.prepend_keymap]]
+on = "<Esc>"
+run = "close"
+desc = "Cancel picker"
+
+# Open key help
+[[pick.prepend_keymap]]
+on = "?"
+run = "help"
+desc = "Open help"
+
+
+# =========================
+# Input layer ([input])
+# =========================
+
+# Move cursor left (vim h)
+[[input.prepend_keymap]]
+on = "h"
+run = "move -1"
+desc = "Move cursor left"
+
+# Move cursor right (vim l)
+[[input.prepend_keymap]]
+on = "l"
+run = "move 1"
+desc = "Move cursor right"
+
+# Move to beginning of previous/current word (vim b)
+[[input.prepend_keymap]]
+on = "b"
+run = "backward"
+desc = "Move backward by word"
+
+# Move to beginning of next word (vim w)
+[[input.prepend_keymap]]
+on = "w"
+run = "forward"
+desc = "Move forward by word"
+
+# Move to end of current/next word (vim e)
+[[input.prepend_keymap]]
+on = "e"
+run = "forward --end-of-word"
+desc = "Move to end of word"
+
+# Move to start of line (vim 0 approximation)
+[[input.prepend_keymap]]
+on = "0"
+run = "move -999"
+desc = "Move to start of line"
+
+# Move to end of line (vim $ approximation)
+[[input.prepend_keymap]]
+on = "$"
+run = "move 999"
+desc = "Move to end of line"
+
+# Enter insert mode (vim i)
+[[input.prepend_keymap]]
+on = "i"
+run = "insert"
+desc = "Enter insert mode"
+
+# Enter insert mode after cursor (vim a)
+[[input.prepend_keymap]]
+on = "a"
+run = "insert --append"
+desc = "Append after cursor"
+
+# Enter visual mode (vim v)
+[[input.prepend_keymap]]
+on = "v"
+run = "visual"
+desc = "Enter visual mode"
+
+# Delete selection/char (vim x)
+[[input.prepend_keymap]]
+on = "x"
+run = "delete"
+desc = "Delete selection"
+
+# Cut selection (vim d behavior)
+[[input.prepend_keymap]]
+on = "d"
+run = "delete --cut"
+desc = "Cut selection"
+
+# Change selection and enter insert mode (vim c)
+[[input.prepend_keymap]]
+on = "c"
+run = "delete --insert"
+desc = "Change selection"
+
+# Yank selection (vim y)
+[[input.prepend_keymap]]
+on = "y"
+run = "yank"
+desc = "Yank selection"
+
+# Paste after cursor (vim p)
+[[input.prepend_keymap]]
+on = "p"
+run = "paste"
+desc = "Paste after cursor"
+
+# Paste before cursor (vim P)
+[[input.prepend_keymap]]
+on = "P"
+run = "paste --before"
+desc = "Paste before cursor"
+
+# Undo (vim u)
+[[input.prepend_keymap]]
+on = "u"
+run = "undo"
+desc = "Undo"
+
+# Redo (vim Ctrl-r)
+[[input.prepend_keymap]]
+on = "<C-r>"
+run = "redo"
+desc = "Redo"
+
+# Submit input
+[[input.prepend_keymap]]
+on = "<Enter>"
+run = "close --submit"
+desc = "Submit input"
+
+# Exit mode or cancel input
+[[input.prepend_keymap]]
+on = "<Esc>"
+run = "escape"
+desc = "Escape input mode"
+
+# Exit mode or cancel input (vim q convenience)
+[[input.prepend_keymap]]
+on = "q"
+run = "escape"
+desc = "Escape input mode"
+
+# Open key help
+[[input.prepend_keymap]]
+on = "?"
+run = "help"
+desc = "Open help"
+
+
+# =========================
+# Confirm layer ([confirm])
+# =========================
+
+# Move cursor down (vim j)
+[[confirm.prepend_keymap]]
+on = "j"
+run = "arrow 1"
+desc = "Move cursor down"
+
+# Move cursor up (vim k)
+[[confirm.prepend_keymap]]
+on = "k"
+run = "arrow -1"
+desc = "Move cursor up"
+
+# Move to previous option (vim h)
+[[confirm.prepend_keymap]]
+on = "h"
+run = "arrow -1"
+desc = "Move to previous option"
+
+# Move to next option (vim l)
+[[confirm.prepend_keymap]]
+on = "l"
+run = "arrow 1"
+desc = "Move to next option"
+
+# Jump to top option (vim gg)
+[[confirm.prepend_keymap]]
+on = ["g", "g"]
+run = "arrow top"
+desc = "Go to first option"
+
+# Jump to bottom option (vim G)
+[[confirm.prepend_keymap]]
+on = "G"
+run = "arrow bot"
+desc = "Go to last option"
+
+# Submit confirmation
+[[confirm.prepend_keymap]]
+on = "<Enter>"
+run = "close --submit"
+desc = "Submit confirmation"
+
+# Cancel confirmation (vim q)
+[[confirm.prepend_keymap]]
+on = "q"
+run = "close"
+desc = "Cancel confirmation"
+
+# Cancel confirmation (escape)
+[[confirm.prepend_keymap]]
+on = "<Esc>"
+run = "close"
+desc = "Cancel confirmation"
+
+# Open key help
+[[confirm.prepend_keymap]]
+on = "?"
+run = "help"
+desc = "Open help"
+
+
+# =========================
+# Completion layer ([cmp])
+# =========================
+
+# Move cursor down (vim j)
+[[cmp.prepend_keymap]]
+on = "j"
+run = "arrow 1"
+desc = "Move cursor down"
+
+# Move cursor up (vim k)
+[[cmp.prepend_keymap]]
+on = "k"
+run = "arrow -1"
+desc = "Move cursor up"
+
+# Jump to top (vim gg)
+[[cmp.prepend_keymap]]
+on = ["g", "g"]
+run = "arrow top"
+desc = "Go to top"
+
+# Jump to bottom (vim G)
+[[cmp.prepend_keymap]]
+on = "G"
+run = "arrow bot"
+desc = "Go to bottom"
+
+# Submit selected completion
+[[cmp.prepend_keymap]]
+on = "<Enter>"
+run = "close --submit"
+desc = "Submit completion"
+
+# Submit selected completion (vim l)
+[[cmp.prepend_keymap]]
+on = "l"
+run = "close --submit"
+desc = "Submit completion"
+
+# Cancel completion (vim h)
+[[cmp.prepend_keymap]]
+on = "h"
+run = "close"
+desc = "Cancel completion"
+
+# Cancel completion (vim q)
+[[cmp.prepend_keymap]]
+on = "q"
+run = "close"
+desc = "Cancel completion"
+
+# Cancel completion (escape)
+[[cmp.prepend_keymap]]
+on = "<Esc>"
+run = "close"
+desc = "Cancel completion"
+
+# Open key help
+[[cmp.prepend_keymap]]
+on = "?"
+run = "help"
+desc = "Open help"
+
+
+# =========================
+# Help layer ([help])
+# =========================
+
+# Move cursor down (vim j)
+[[help.prepend_keymap]]
+on = "j"
+run = "arrow 1"
+desc = "Move cursor down"
+
+# Move cursor up (vim k)
+[[help.prepend_keymap]]
+on = "k"
+run = "arrow -1"
+desc = "Move cursor up"
+
+# Jump to top (vim gg)
+[[help.prepend_keymap]]
+on = ["g", "g"]
+run = "arrow top"
+desc = "Go to top"
+
+# Jump to bottom (vim G)
+[[help.prepend_keymap]]
+on = "G"
+run = "arrow bot"
+desc = "Go to bottom"
+
+# Page down half screen (vim Ctrl-d)
+[[help.prepend_keymap]]
+on = "<C-d>"
+run = "arrow 50%"
+desc = "Move down half a page"
+
+# Page up half screen (vim Ctrl-u)
+[[help.prepend_keymap]]
+on = "<C-u>"
+run = "arrow -50%"
+desc = "Move up half a page"
+
+# Filter help entries (vim /)
+[[help.prepend_keymap]]
+on = "/"
+run = "filter"
+desc = "Filter help entries"
+
+# Close help menu
+[[help.prepend_keymap]]
+on = "q"
+run = "close"
+desc = "Close help"
+
+# Escape filter or close help
+[[help.prepend_keymap]]
+on = "<Esc>"
+run = "escape"
+desc = "Clear filter or close help"
+
+# Close help menu (vim h)
+[[help.prepend_keymap]]
+on = "h"
+run = "close"
+desc = "Close help"

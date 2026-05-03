@@ -1,0 +1,5 @@
+#:schema https://raw.githubusercontent.com/yazi-rs/schemas/refs/heads/main/schemas/yazi.json
+
+[mgr]
+ratio = [2, 2, 3]
+show_hidden = true
