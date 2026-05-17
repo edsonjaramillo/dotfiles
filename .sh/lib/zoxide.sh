@@ -14,6 +14,11 @@ zinit() {
 	zoxide add "$HOME/.config/home-manager/"
 	zoxide add "$HOME/.config/nvim/"
 	zoxide add "$HOME/code/"
+	zoxide add "$HOME/code/oss/"
+	zoxide add "$HOME/code/personal/"
+	zoxide add "$HOME/code/playground/"
+	zoxide add "$HOME/code/plugins/"
+	zoxide add "$HOME/code/work/"
 	zoxide add "$HOME/dotfiles/"
 }
 
