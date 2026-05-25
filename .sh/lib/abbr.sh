@@ -68,4 +68,8 @@ iabbr() {
 	abbr add ogi='ordo global install' --quiet
 	abbr add ogu='ordo global uninstall' --quiet
 	abbr add ogup='ordo global update' --quiet
+
+	############### ai ###############
+	abbr add oc="opencode" --quiet
+	abbr add co="codex" --quiet
 }
