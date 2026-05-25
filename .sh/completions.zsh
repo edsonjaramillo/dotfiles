@@ -79,3 +79,10 @@ fi
 if has_command bun; then
 	source <(vidmini completion zsh)
 fi
+
+if has_command opencode; then
+	source <(opencode completion)
+fi
+
+# bun completions
+[ -s "/Users/edson/.bun/_bun" ] && source "/Users/edson/.bun/_bun"
