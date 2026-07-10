@@ -9,6 +9,7 @@ iabbr() {
 
 	############### core ###############
 	abbr add cl='clear' --quiet
+	abbr add ee="exit" --quiet
 
 	################## git ##################
 	# core
