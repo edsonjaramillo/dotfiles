@@ -76,10 +76,6 @@ if has_command pnpm; then
 	eval "$(pnpm completion zsh)"
 fi
 
-if has_command bun; then
-	source <(vidmini completion zsh)
-fi
-
 if has_command opencode; then
 	source <(opencode completion)
 fi
