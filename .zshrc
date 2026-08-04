@@ -14,9 +14,4 @@ source_dir "$HOME/.sh/aliases/"
 # completions
 source "$HOME/.sh/completions.zsh"
 
-# Source all files in $HOME/.sh/site-functions/
-if [[ -d "$HOME/.sh/site-functions" ]]; then
-	for file in "$HOME/.sh/site-functions"/*; do
-		[[ -f "$file" ]] && source "$file"
-	done
-fi
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
