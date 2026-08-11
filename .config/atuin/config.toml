@@ -41,6 +41,7 @@ history_filter = [
   "^mkdir",
   "^mv ",
   "^nvim ",
+  "^opencode",
   "^pnpm (?:install|uninstall)\\b",
   "^rm(?:\\s|$)",
   "^task",
