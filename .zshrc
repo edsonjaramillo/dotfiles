@@ -11,7 +11,8 @@ source_dir "$HOME/.sh/lib/"
 # aliases
 source_dir "$HOME/.sh/aliases/"
 
+# initialization
+source "$HOME/.sh/init.sh"
+
 # completions
 source "$HOME/.sh/completions.zsh"
-
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
