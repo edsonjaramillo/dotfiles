@@ -80,5 +80,9 @@ if has_command opencode; then
 	source <(opencode completion)
 fi
 
+if has_command completely; then
+	source <(completely preview "$HOME/.sh/completions/z.yaml")
+fi
+
 # bun completions
 [ -s "/Users/edson/.bun/_bun" ] && source "/Users/edson/.bun/_bun"
