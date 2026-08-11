@@ -1,25 +1,35 @@
 #!/usr/bin/env bash
 
 zinit() {
-	zoxide query --list | while read -r line; do
-		zoxide remove "$line"
-	done
+	local -a entries=()
+	local -a directories=()
+	local path
 
-	find "$HOME/code" -mindepth 1 -maxdepth 1 -type d | while read -r dir; do
-		find "$dir" -mindepth 1 -maxdepth 1 -type d | while read -r subdir; do
-			zoxide add "$subdir"
-		done
-	done
+	while IFS= read -r path; do
+		entries+=("$path")
+	done < <(zoxide query --list)
 
-	zoxide add "$HOME/.config/nvim/"
-	zoxide add "$HOME/.config/system-packages/"
-	zoxide add "$HOME/code/"
-	zoxide add "$HOME/code/oss/"
-	zoxide add "$HOME/code/personal/"
-	zoxide add "$HOME/code/playground/"
-	zoxide add "$HOME/code/plugins/"
-	zoxide add "$HOME/code/work/"
-	zoxide add "$HOME/dotfiles/"
+	if ((${#entries[@]})); then
+		zoxide remove "${entries[@]}"
+	fi
+
+	while IFS= read -r -d '' path; do
+		directories+=("$path")
+	done < <(find "$HOME/code" -mindepth 2 -maxdepth 2 -type d -print0)
+
+	directories+=(
+		"$HOME/.config/nvim/"
+		"$HOME/.config/system-packages/"
+		"$HOME/code/"
+		"$HOME/code/oss/"
+		"$HOME/code/personal/"
+		"$HOME/code/playground/"
+		"$HOME/code/plugins/"
+		"$HOME/code/work/"
+		"$HOME/dotfiles/"
+	)
+
+	zoxide add "${directories[@]}"
 }
 
 zlist() {
