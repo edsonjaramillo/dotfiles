@@ -84,5 +84,9 @@ if has_command completely; then
 	source <(completely preview "$HOME/.sh/completions/z.yaml")
 fi
 
+if has_command hst; then
+	source <(hst completion zsh)
+fi
+
 # bun completions
 [ -s "/Users/edson/.bun/_bun" ] && source "/Users/edson/.bun/_bun"
