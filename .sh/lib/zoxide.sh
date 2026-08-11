@@ -3,33 +3,41 @@
 zinit() {
 	local -a entries=()
 	local -a directories=()
-	local path
+	local directory
 
-	while IFS= read -r path; do
-		entries+=("$path")
+	while IFS= read -r directory; do
+		entries+=("$directory")
 	done < <(zoxide query --list)
 
 	if ((${#entries[@]})); then
 		zoxide remove "${entries[@]}"
 	fi
 
-	while IFS= read -r -d '' path; do
-		directories+=("$path")
-	done < <(find "$HOME/code" -mindepth 2 -maxdepth 2 -type d -print0)
+	if [[ -d "$HOME/code" ]]; then
+		while IFS= read -r -d '' directory; do
+			directories+=("$directory")
+		done < <(fd --hidden --no-ignore --type directory --exact-depth 2 --print0 . "$HOME/code")
+	fi
 
-	directories+=(
-		"$HOME/.config/nvim/"
-		"$HOME/.config/system-packages/"
-		"$HOME/code/"
-		"$HOME/code/oss/"
-		"$HOME/code/personal/"
-		"$HOME/code/playground/"
-		"$HOME/code/plugins/"
-		"$HOME/code/work/"
-		"$HOME/dotfiles/"
-	)
+	for directory in \
+		"$HOME/.config/nvim/" \
+		"$HOME/.config/system-packages/" \
+		"$HOME/.pi/agent/" \
+		"$HOME/code/" \
+		"$HOME/code/oss/" \
+		"$HOME/code/personal/" \
+		"$HOME/code/playground/" \
+		"$HOME/code/plugins/" \
+		"$HOME/code/work/" \
+		"$HOME/dotfiles/"; do
+		if [[ -d "$directory" ]]; then
+			directories+=("$directory")
+		fi
+	done
 
-	zoxide add "${directories[@]}"
+	if ((${#directories[@]})); then
+		zoxide add "${directories[@]}"
+	fi
 }
 
 zlist() {
