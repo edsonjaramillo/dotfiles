@@ -1,7 +1,7 @@
-# functions coming from prerequisites.zsh
+# functions coming from prerequistites.sh
 # has_command (checks if a command exists)
 # source_dir (sources all files in a directory)
-source "$HOME/.sh/prerequisites.zsh"
+source "$HOME/.sh/prerequistites.sh"
 
 source "$HOME/.sh/plugins.zsh"
 
