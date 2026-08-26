@@ -20,6 +20,8 @@ zinit() {
 	fi
 
 	for directory in \
+		"$HOME/.config/" \
+		"$HOME/.config/bond" \
 		"$HOME/.config/nvim/" \
 		"$HOME/.config/system-packages/" \
 		"$HOME/.pi/agent/" \
