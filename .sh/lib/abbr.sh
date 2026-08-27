@@ -70,6 +70,10 @@ iabbr() {
 	abbr add ogu='ordo global uninstall' --quiet
 	abbr add ogup='ordo global update' --quiet
 
+	############### bond ###############
+	abbr add bsa='bond skills add' --quiet
+	abbr add bsr='bond skills remove' --quiet
+
 	############### ai ###############
 	abbr add oc="opencode" --quiet
 	abbr add co="codex" --quiet

@@ -21,7 +21,7 @@ zinit() {
 
 	for directory in \
 		"$HOME/.config/" \
-		"$HOME/.config/bond" \
+		"$HOME/.config/bond/skills/" \
 		"$HOME/.config/nvim/" \
 		"$HOME/.config/system-packages/" \
 		"$HOME/.pi/agent/" \
