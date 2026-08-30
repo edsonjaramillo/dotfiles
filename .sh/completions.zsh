@@ -71,9 +71,11 @@ _cache_completion fnm -- fnm completions --shell zsh
 _cache_completion gh -- gh completion -s zsh
 _cache_completion hst -- hst completion zsh
 _cache_completion jj -- jj util completion zsh
+_cache_completion op -- op completion zsh
 _cache_completion opencode -- opencode completion
 _cache_completion ordo -- ordo completion zsh
 _cache_completion pnpm -- pnpm completion zsh
+_cache_completion secrets -- secrets completion zsh
 _cache_completion sr -- sr completion zsh
 _cache_completion task -- task --completion zsh
 _cache_completion tm -- tm completion zsh
