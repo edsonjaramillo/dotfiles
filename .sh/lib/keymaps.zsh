@@ -119,6 +119,105 @@ bindkey -M emacs '^X^W' _fzf_jump_to_word_widget
 bindkey -M viins '^X^W' _fzf_jump_to_word_widget
 bindkey -M vicmd '^X^W' _fzf_jump_to_word_widget
 
+# Ask for text, find its occurrences, and jump to the selected one.
+_fzf_jump_to_text_widget() {
+	local search_text key selected before after snippet
+	local -a matches candidates
+	local -i index offset start end match_end
+	local -i length=${#BUFFER} search_length max_start
+
+	if ((length == 0)); then
+		zle -M 'The command line is empty'
+		return 1
+	fi
+
+	while true; do
+		zle -M "Search command line (Enter confirms, Esc cancels): $search_text"
+		zle redisplay
+		read -k 1 key || return
+
+		case $key in
+			($'\r'|$'\n') break ;;
+			($'\e'|$'\003') return ;;
+			($'\177'|$'\b') search_text=${search_text[1,-2]} ;;
+			($'\025') search_text='' ;;
+			([[:cntrl:]]) ;;
+			(*) search_text+=$key ;;
+		esac
+	done
+
+	if [[ -z $search_text ]]; then
+		zle -M 'Enter some text to search for'
+		return 1
+	fi
+
+	search_length=${#search_text}
+	max_start=$((length - search_length + 1))
+
+	# List matches after the cursor first, followed by matches before it.
+	for ((index = CURSOR + 2; index <= max_start; index++)); do
+		[[ ${BUFFER[index,$((index + search_length - 1))]} == "$search_text" ]] && \
+			matches+=("$((index - 1))")
+	done
+	for ((index = 1; index <= CURSOR + 1 && index <= max_start; index++)); do
+		[[ ${BUFFER[index,$((index + search_length - 1))]} == "$search_text" ]] && \
+			matches+=("$((index - 1))")
+	done
+
+	if ((!${#matches})); then
+		zle -M "No '$search_text' in the command line"
+		return 1
+	fi
+
+	if ((${#matches} == 1)); then
+		CURSOR=${matches[1]}
+		zle redisplay
+		return
+	fi
+
+	if ! command -v fzf >/dev/null; then
+		zle -M 'Choosing among multiple matches requires fzf'
+		return 1
+	fi
+
+	for offset in "${matches[@]}"; do
+		index=$((offset + 1))
+		match_end=$((index + search_length - 1))
+		start=$((index > 20 ? index - 20 : 1))
+		end=$((match_end + 20 < length ? match_end + 20 : length))
+		before=''
+		after=''
+		((index > start)) && before=${BUFFER[start,$((index - 1))]}
+		((match_end < end)) && after=${BUFFER[$((match_end + 1)),end]}
+		snippet="${before}[$search_text]${after}"
+		((start > 1)) && snippet="…$snippet"
+		((end < length)) && snippet+='…'
+		snippet=${snippet//$'\n'/ }
+		snippet=${snippet//$'\t'/ }
+		# Keep the zero-based cursor offset hidden in the first field.
+		candidates+=("$offset"$'\t'"column $offset"$'\t'"$snippet")
+	done
+
+	selected=$(printf '%s\n' "${candidates[@]}" | fzf \
+		--height=40% \
+		--layout=reverse \
+		--border \
+		--no-sort \
+		--delimiter=$'\t' \
+		--nth=2.. \
+		--with-nth=2.. \
+		--bind='one:accept' \
+		--prompt="Choose '$search_text'> ") || return
+
+	CURSOR=${selected%%$'\t'*}
+	zle redisplay
+}
+
+zle -N _fzf_jump_to_text_widget
+bindkey -M emacs '^G' _fzf_jump_to_text_widget
+bindkey -M viins '^G' _fzf_jump_to_text_widget
+bindkey -M vicmd '^G' _fzf_jump_to_text_widget
+
 # Show unassigned Ctrl-letter and Ctrl-X Ctrl-letter bindings.
 # Pass a keymap name to inspect another map, e.g. `available-keybinds emacs`.
 available-keybinds() {
