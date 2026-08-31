@@ -56,3 +56,10 @@ _fzf_home_widget() {
 zle -N _fzf_home_widget
 bindkey -M emacs '^T' _fzf_home_widget
 bindkey -M viins '^T' _fzf_home_widget
+
+# Open the current command line in $VISUAL or $EDITOR, then return it to the prompt.
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey -M emacs '^G' edit-command-line
+bindkey -M viins '^G' edit-command-line
+bindkey -M vicmd '^G' edit-command-line
