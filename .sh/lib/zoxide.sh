@@ -21,9 +21,15 @@ zinit() {
 
 	for directory in \
 		"$HOME/.config/" \
+		"$HOME/.config/bond/instructions/" \
+		"$HOME/.config/bond/resources/" \
 		"$HOME/.config/bond/skills/" \
 		"$HOME/.config/nvim/" \
 		"$HOME/.config/system-packages/" \
+		"$HOME/.config/system-packages/brew/" \
+		"$HOME/.config/system-packages/bun/" \
+		"$HOME/.config/system-packages/nix/" \
+		"$HOME/.config/system-packages/npm/" \
 		"$HOME/.pi/agent/" \
 		"$HOME/code/" \
 		"$HOME/code/oss/" \
