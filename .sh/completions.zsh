@@ -77,6 +77,7 @@ _cache_completion ordo -- ordo completion zsh
 _cache_completion pnpm -- pnpm completion zsh
 _cache_completion secrets -- secrets completion zsh
 _cache_completion sr -- sr completion zsh
+_cache_completion tailscale -- tailscale completion zsh
 _cache_completion task -- task --completion zsh
 _cache_completion tm -- tm completion zsh
 _cache_completion uv -- uv generate-shell-completion zsh
