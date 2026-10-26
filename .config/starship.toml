@@ -38,14 +38,29 @@ truncate_to_repo = false
 style = 'fg:green'
 symbol = ' '
 format = '[on](white) [$symbol$branch ]($style)'
+truncation_length = 24
+truncation_symbol = '…'
+
+[git_state]
+format = '[\($state( $progress_current/$progress_total)\)]($style) '
+style = 'bold yellow'
+
+[git_metrics]
+disabled = false
+added_style = 'fg:green'
+deleted_style = 'fg:red'
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
 
 [git_status]
 style = 'fg:green'
 format = '([$all_status$ahead_behind]($style) )'
 
 [custom.gh_user]
-command = 'gh config get user --host github.com 2>/dev/null'
-when = 'git rev-parse --git-dir >/dev/null 2>&1'
+# Active account is written by gh to hosts.yml (updated by `gh auth login/switch`)
+command = '''awk '/^github.com:/{h=1;next} /^[^ ]/{h=0} h && $1=="user:"{print $2; exit}' "${GH_CONFIG_DIR:-$HOME/.config/gh}/hosts.yml"'''
+require_repo = true
+when = true
+shell = ['sh']
 format = '[$symbol$output ]($style)'
 symbol = ' '
 style = 'fg:cyan'
