@@ -40,6 +40,7 @@ typeset -gA _ABBRS=(
 	fdf 'fd -H -I -t f -E .git'
 	fdd 'fd -H -I -t d -E .git'
 	fde 'fd -H -I -t f -E .git -e'
+	rmnm 'fd -H -I -t d -g node_modules --prune -X rm -rf' # nuke node_modules under cwd
 
 	############### lazy ###############
 	lg 'lazygit'
