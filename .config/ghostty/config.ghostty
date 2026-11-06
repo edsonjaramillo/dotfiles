@@ -1,0 +1,56 @@
+
+# Appearance
+font-family = GeistMono Nerd Font
+font-size = 13
+
+# Tab bar (wezterm: enable_tab_bar = true; tab_max_width has no equivalent)
+window-show-tab-bar = always
+
+# Colors
+background = #0a0a0a
+foreground = #f5f5f5
+
+# ansi
+palette = 0=#0a0a0a
+palette = 1=#ff6467
+palette = 2=#05df72
+palette = 3=#ffdf20
+palette = 4=#51a2ff
+palette = 5=#ed6aff
+palette = 6=#00b8db
+palette = 7=#f5f5f5
+# brights
+palette = 8=#262626
+palette = 9=#e7000b
+palette = 10=#00a63e
+palette = 11=#f0b100
+palette = 12=#155dfc
+palette = 13=#e12afb
+palette = 14=#0092b8
+palette = 15=#fafafa
+
+minimum-contrast = 1.1
+
+# Window
+window-padding-x = 15
+# top,bottom
+window-padding-y = 15,5
+# window-width = 120
+# window-height = 30
+window-padding-balance = true
+window-padding-color = extend
+window-theme = ghostty
+unfocused-split-opacity = 0.85
+background-opacity = 0.95
+background-blur = true
+
+# Cursor (blink rate isn't configurable in Ghostty, only on/off)
+cursor-style-blink = true
+
+# Behavior
+shell-integration-features = cursor,sudo
+copy-on-select = clipboard
+confirm-close-surface = false
+
+# Keybinds
+keybind = ctrl+shift+comma=reload_config
