@@ -36,6 +36,10 @@ typeset -gA _ABBRS=(
 	grhh 'git reset --hard'        # discard uncommitted changes
 	grhh1 'git reset --hard HEAD~' # drop last commit AND its changes
 
+	############### docker ###############
+	dcd 'docker compose down'
+	dcu 'docker compose up -d'
+
 	############### files ###############
 	fdf 'fd -H -I -t f -E .git'
 	fdd 'fd -H -I -t d -E .git'
