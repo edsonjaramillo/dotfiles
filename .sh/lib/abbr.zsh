@@ -7,6 +7,7 @@ typeset -gA _ABBRS=(
 
 	############### zsh ##################
 	zrs 'source ~/.zshrc'
+	ns 'exec zsh'
 
 	############### core ###############
 	cl 'clear'
