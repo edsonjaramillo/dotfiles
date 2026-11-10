@@ -1,0 +1,38 @@
+keep:
+  protocol: https
+  repos:
+    - repo: edsonjaramillo/system-packages
+      destination: ~/.config/system-packages
+      branch: main
+      post_clone: [task install]
+
+    - repo: edsonjaramillo/dotfiles
+      destination: ~/dotfiles
+      branch: main
+
+    - repo: edsonjaramillo/dots
+      destination: ~/code/oss/dots
+      branch: main
+      post_clone: [task build, dots link --all]
+
+    - repo: edsonjaramillo/agent
+      destination: ~/.pi/agent
+      branch: main
+
+    - repo: edsonjaramillo/agent-tools
+      destination: ~/.config/bond
+      branch: main
+
+    - repo: edsonjaramillo/nvim
+      destination: ~/.config/nvim
+      branch: main
+
+    - repo: edsonjaramillo/ordo
+      destination: ~/code/oss/ordo
+      branch: main
+      post_clone: [task build]
+
+    - repo: edsonjaramillo/secrets
+      destination: ~/code/oss/secrets
+      branch: main
+      post_clone: [task build]
