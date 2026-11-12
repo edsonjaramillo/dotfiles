@@ -77,6 +77,11 @@ typeset -gA _ABBRS=(
 	ogup 'ordo global update'
 
 	############### bond ###############
+	tkc 'tig keep clone'
+	tkp 'tig keep pull'
+	tks 'tig keep status --dirty --out-of-sync'
+
+	############### bond ###############
 	bsa 'bond skills add'
 	bsr 'bond skills remove'
 
