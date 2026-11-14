@@ -21,5 +21,5 @@ fi
 
 # zoxide
 if has_command zoxide; then
-	eval "$(zoxide init zsh)"
+	eval "$(zoxide init zsh --hook none)"
 fi
