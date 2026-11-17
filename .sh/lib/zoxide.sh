@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+# Appends a directory and its depth-1 subdirectories (non-hidden) to the
+# caller's `directories` array.
+_zinit_with_children() {
+	local parent="$1"
+	local child
+
+	[[ -d "$parent" ]] || return 0
+
+	directories+=("$parent")
+	while IFS= read -r -d '' child; do
+		directories+=("$child")
+	done < <(fd --no-ignore --type directory --exact-depth 1 --print0 . "$parent")
+}
+
 zinit() {
 	local -a entries=()
 	local -a directories=()
@@ -20,23 +34,16 @@ zinit() {
 	fi
 
 	for directory in \
-		"$HOME/.config/" \
-		"$HOME/.config/bond/instructions/" \
-		"$HOME/.config/bond/resources/" \
-		"$HOME/.config/bond/skills/" \
-		"$HOME/.config/nvim/" \
+		"$HOME/.config/bond/" \
 		"$HOME/.config/system-packages/" \
-		"$HOME/.config/system-packages/brew/" \
-		"$HOME/.config/system-packages/bun/" \
-		"$HOME/.config/system-packages/nix/" \
-		"$HOME/.config/system-packages/npm/" \
+		"$HOME/code/"; do
+		_zinit_with_children "$directory"
+	done
+
+	for directory in \
+		"$HOME/.config/" \
+		"$HOME/.config/nvim/" \
 		"$HOME/.pi/agent/" \
-		"$HOME/code/" \
-		"$HOME/code/oss/" \
-		"$HOME/code/personal/" \
-		"$HOME/code/playground/" \
-		"$HOME/code/plugins/" \
-		"$HOME/code/work/" \
 		"$HOME/dotfiles/"; do
 		if [[ -d "$directory" ]]; then
 			directories+=("$directory")
